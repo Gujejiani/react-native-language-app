@@ -4,10 +4,18 @@ import React from 'react';
 import { TabBarIcon } from '@/components/navigation/TabBarIcon';
 import { Colors } from '@/constants/Colors';
 import { useColorScheme } from '@/hooks/useColorScheme';
+import { useCustomThemeContext } from '@/context/theme/themeProvider';
+import { TouchableOpacity } from 'react-native';
 
 export default function TabLayout() {
   const colorScheme = useColorScheme();
 
+
+  const themeContext = useCustomThemeContext();
+
+  const handleThemeToggle = () => {
+    themeContext.setTheme();
+  };
   return (
     <Tabs
       screenOptions={{
@@ -33,6 +41,31 @@ export default function TabLayout() {
           ),
         }}
       />
+
+<Tabs.Screen
+        name="theme"
+        options={{
+          title: 'Theme',
+          tabBarIcon: ({ color, focused }) => (
+            <TabBarIcon
+              name={themeContext.theme === 'dark' ? 'sunny' : 'moon-outline'}
+              color={color}
+            />
+          ),
+          tabBarButton: (props) => (
+            <TouchableOpacity
+             onPress={(e) => {
+              e.preventDefault(); // Prevent the default navigation behavior
+              handleThemeToggle(); // Toggle the theme
+            }}
+            style={{ flex: 1, alignItems: 'center' }} // Adjust styling as needed
+          >
+            {props.children}
+          </TouchableOpacity>
+          ),
+        }}
+      />
+      
     </Tabs>
   );
 }
