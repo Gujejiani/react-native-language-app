@@ -2,18 +2,39 @@ export interface ILanguages {
     languages: ILanguage[];
 }
 
-interface ILanguage {
+export interface ILanguage {
     id: number;
     name: LocalizedString;
     description: LocalizedString;
     imageUrl?: string;
     icon?: string;
-    modules: IModule[];
     createdAt?: Date;
     updatedAt?: Date;
+    sections: ISection[];
 }
 
-interface IModule {
+
+export interface ISection { 
+    id: number;
+    name: LocalizedString;
+    units: IUnit[];
+
+ 
+}
+
+export interface IUnit {
+    id: number;
+    name: LocalizedString;
+    description: LocalizedString;
+    modules: IModule[];
+}
+
+
+
+
+
+
+export interface IModule {
     id: number;
     name: LocalizedString;
     description: LocalizedString;
@@ -23,7 +44,7 @@ interface IModule {
     count: number;
 }
 
-interface ILesson {
+export interface ILesson {
     id: number;
     name: LocalizedString;
     description: LocalizedString;
@@ -33,7 +54,7 @@ interface ILesson {
     challenges: IChallenge[]; // Unified concept for tasks and exams
 }
 
-interface IChallenge {
+export interface IChallenge {
     id: number;
     name: string;
     description: string;
@@ -43,14 +64,14 @@ interface IChallenge {
     questions?: IQuestion[]; // Optional, only for 'exam' type challenges
 }
 
-interface IQuestion {
+ interface IQuestion {
     id: number;
     questionText: string;
     options: IOption[]; // Possible answers for multiple-choice questions
     correctAnswer: string; // The correct answer
 }
 
-interface IOption {
+ interface IOption {
     id: number;
     optionText: string; // Text of the answer option
     isCorrect: boolean; // Indicates if this option is the correct one
