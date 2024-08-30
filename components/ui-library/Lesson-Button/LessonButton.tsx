@@ -103,7 +103,7 @@ const LessonButton: React.FC<{ progress: number; iconName: string; label?: strin
     >
 
 
-      <InfoModal title="Title" locked={false} visible={true} review={false}  description="Description" action={() => {modalActionHandler}} />
+<InfoModal title="Title" locked={false} visible={true} review={false}  description="Description" action={() => {modalActionHandler}} />
    
    
       {  label &&  (

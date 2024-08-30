@@ -17,7 +17,7 @@ const screenWidth = Dimensions.get('window').width;
   if (!visible) return null;
 
   return (
-    <Modal transparent={true} visible={visible} animationType="fade" onRequestClose={onClose}>
+    <Modal  transparent={true} visible={visible} animationType="fade" onRequestClose={onClose}>
       <View style={styles.container}>
         <View style={styles.modalContent}>
           <View style={styles.arrowContainer}>
@@ -44,6 +44,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: 'transparent', // Semi-transparent background
     zIndex: 1000, // Ensure it's on top
+    top: 100,
+   
+    left: 0
+    
   },
   arrowContainer: {
     position: 'absolute',
