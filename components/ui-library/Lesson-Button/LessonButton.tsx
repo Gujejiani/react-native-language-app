@@ -6,6 +6,7 @@ import * as Haptics from 'expo-haptics';
 import { LinearGradient } from 'expo-linear-gradient';
 import { ThemedView } from '@/components/ThemedView';
 import { ThemedText } from '@/components/ThemedText';
+import InfoModal from '../Info-modal/InfoModal';
 
 const SIZE = 100; // Button size
 const STROKE_WIDTH = 10; // Width of the progress ring
@@ -90,12 +91,19 @@ const LessonButton: React.FC<{ progress: number; iconName: string; label?: strin
     outputRange: [circumference, 0],
   });
 
+  const modalActionHandler =()=>{
+    console.log('Action')
+  }
+
   return (
     <TouchableOpacity
       style={styles.container}
       onPressIn={handlePressIn}
       onPressOut={handlePressOut}
     >
+
+
+      <InfoModal title="Title" locked={false} visible={true} review={false}  description="Description" action={() => {modalActionHandler}} />
    
    
       {  label &&  (
@@ -169,6 +177,7 @@ const styles = StyleSheet.create({
     height: SIZE,
     justifyContent: 'center',
     alignItems: 'center',
+    position: 'relative',
   },
   innerCircleWrapper: {
     position: 'absolute',

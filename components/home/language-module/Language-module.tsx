@@ -41,7 +41,7 @@ export const LanguageModule: React.FC<LanguageModuleProps> = ({module}) => {
 
 const styles =  StyleSheet.create({
     moduleContainer: {
-    
+     
         display: 'flex',
         width: '100%',
     },
@@ -66,5 +66,6 @@ const styles =  StyleSheet.create({
         backgroundColor: 'gray', 
         marginHorizontal: 10, 
       },
+      
 
 })
