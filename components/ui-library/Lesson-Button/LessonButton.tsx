@@ -1,21 +1,47 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import { View, StyleSheet, TouchableOpacity, Animated } from 'react-native';
 import Svg, { Circle } from 'react-native-svg';
 import FontAwesome6 from '@expo/vector-icons/FontAwesome6';
 import * as Haptics from 'expo-haptics';
 import { LinearGradient } from 'expo-linear-gradient';
+import { ThemedView } from '@/components/ThemedView';
+import { ThemedText } from '@/components/ThemedText';
 
 const SIZE = 100; // Button size
 const STROKE_WIDTH = 10; // Width of the progress ring
 
 const AnimatedCircle = Animated.createAnimatedComponent(Circle);
 
-const LessonButton: React.FC<{ progress: number; iconName: string; label?: string }> = ({ progress = 0.75, iconName = "star" }) => {
+const LessonButton: React.FC<{ progress: number; iconName: string; label?: string }> = ({ progress = 0.75, iconName = "star", label }) => {
   const radius = (SIZE - STROKE_WIDTH) / 2;
   const circumference = radius * 2 * Math.PI;
 
   const animatedProgress = useRef(new Animated.Value(0)).current;
   const positionY = useRef(new Animated.Value(0)).current;
+  const labelAnimation = useRef(new Animated.Value(0)).current;
+
+  const [showLabel, setShowLabel] = useState(true);
+
+
+
+  useEffect(() => {
+    if (label) {
+      Animated.loop(
+        Animated.sequence([
+          Animated.timing(labelAnimation, {
+            toValue: 6,
+            duration: 1000,
+            useNativeDriver: true,
+          }),
+          Animated.timing(labelAnimation, {
+            toValue: 0,
+            duration: 1000,
+            useNativeDriver: true,
+          }),
+        ])
+      ).start();
+    }
+  }, [label]);
 
   const handlePressIn = () => {
     // Trigger haptic feedback
@@ -26,6 +52,10 @@ const LessonButton: React.FC<{ progress: number; iconName: string; label?: strin
       toValue: 40, // Move down 10 units
       useNativeDriver: true,
     }).start();
+
+    if(label){
+      setShowLabel(false)
+    }
   };
 
   const handlePressOut = () => {
@@ -34,6 +64,17 @@ const LessonButton: React.FC<{ progress: number; iconName: string; label?: strin
       toValue: 0, // Move back to the original position
       useNativeDriver: true,
     }).start();
+   let timer: any;
+    if(label){
+  timer=  setTimeout(()=>{
+      setShowLabel(true)
+    }, 1500)
+     
+    }
+
+    return () => {
+      clearTimeout(timer)
+    }
   };
 
   useEffect(() => {
@@ -55,6 +96,31 @@ const LessonButton: React.FC<{ progress: number; iconName: string; label?: strin
       onPressIn={handlePressIn}
       onPressOut={handlePressOut}
     >
+   
+   
+      {  label &&  (
+  <Animated.View
+    style={[
+      styles.label,
+      {
+        transform: [{ translateY: labelAnimation }],
+      
+      },
+      showLabel ? { opacity: 1 } : {opacity: 0}
+      
+    ]}
+  >
+    <ThemedView lightColor='white' style={styles.labelContent} >
+      <View style={styles.labelArrow} />
+      <ThemedText style={styles.labelText}>
+        {label}
+      </ThemedText>
+    </ThemedView>
+  </Animated.View>
+)}
+
+
+
       <Svg width={SIZE} height={SIZE}>
         <Circle
           stroke="#e0e0e0"
@@ -124,6 +190,55 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+  },
+
+  label: {
+    position: 'absolute',
+    top: -30,
+    alignSelf: 'center',
+    // backgroundColor: '#f5f5f5', // Background color of the label cloud
+    borderRadius: 20,
+    paddingVertical: 5,
+    paddingHorizontal: 20,
+    borderWidth: 1,
+    borderColor: '#ddd',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 3 },
+    shadowOpacity: 0.3,
+    shadowRadius: 6,
+    elevation: 4,
+    zIndex: 10,
+    backgroundColor: '#fff'
+  },
+  labelContent: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  labelArrow: {
+    width: 0,
+    height: 0,
+    borderLeftWidth: 6,
+    borderRightWidth: 6,
+    borderTopWidth: 6,
+    borderLeftColor: 'transparent',
+    borderRightColor: 'transparent',
+    borderTopColor: '#f5f5f5',
+    marginBottom: -6, // Adjust arrow position
+    alignSelf: 'center',
+    position: 'absolute',
+    zIndex: 20,
+    bottom: -5, // Adjust arrow position
+    left: '50%',
+  
+    transform: [
+      { translateX: -6 }, // Adjust to horizontally center the arrow (half the width)
+    ],
+  },
+  labelText: {
+    color: 'green', // Text color
+    fontSize: 14, // Font size
+    fontWeight: 'bold', // Font weight
+    textTransform: 'uppercase', // Uppercase text
   },
 });
 

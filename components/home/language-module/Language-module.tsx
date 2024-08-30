@@ -13,6 +13,7 @@ interface LanguageModuleProps {
 
 
 export const LanguageModule: React.FC<LanguageModuleProps> = ({module}) => {
+    
         
 
     const moduleLessons = module.lessons.map(lesson => {
@@ -30,7 +31,7 @@ export const LanguageModule: React.FC<LanguageModuleProps> = ({module}) => {
 
             <ModuleTitle title={module.name.en}  />
 
-            <LessonButton  iconName="star" progress={0.75} label="1" />
+            <LessonButton  iconName="star" progress={0.75} label="Start"  />
 
            {moduleLessons}
         </ThemedView>
