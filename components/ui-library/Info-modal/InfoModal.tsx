@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, Dimensions, Modal } from 'react-native';
+import  Button  from '../Button/Button';
 
 interface InfoModalProps {
   visible: boolean;
@@ -25,12 +26,14 @@ const screenWidth = Dimensions.get('window').width;
           </View>
           <Text style={styles.title}>{title}</Text>
           <Text style={styles.description}>{description}</Text>
-          <TouchableOpacity style={styles.button} onPress={action}>
-            <Text style={styles.buttonText}>Action</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.closeButton} onPress={onClose}>
+
+      <View style={styles.button} >
+         <Button   title='Start Lesson' onPress={action}  />
+
+      </View>
+          {/* <TouchableOpacity style={styles.closeButton} onPress={onClose}>
             <Text style={styles.closeButtonText}>Close</Text>
-          </TouchableOpacity>
+          </TouchableOpacity> */}
         </View>
       </View>
     </Modal>
@@ -42,10 +45,9 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'transparent', // Semi-transparent background
     zIndex: 1000, // Ensure it's on top
     top: 100,
-   
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
     left: 0
     
   },
@@ -55,6 +57,9 @@ const styles = StyleSheet.create({
     width: 0,
     height: 0,
     alignItems: 'center',
+  },
+  button:{
+    width: '100%',
   },
   arrow: {
     width: 0,
@@ -68,7 +73,7 @@ const styles = StyleSheet.create({
   },
   modalContent: {
     backgroundColor: '#34D399', // Green background
-    borderRadius: 8,
+    borderRadius: 16,
     padding: 16,
     width: screenWidth * 0.8, // Ensure modal takes up 80% of the screen width
     alignItems: 'center',
@@ -89,17 +94,6 @@ const styles = StyleSheet.create({
     fontSize: 14,
     marginBottom: 16,
     textAlign: 'center',
-  },
-  button: {
-    backgroundColor: '#ffffff',
-    borderRadius: 5,
-    paddingVertical: 8,
-    paddingHorizontal: 16,
-  },
-  buttonText: {
-    color: '#34D399', // Green color
-    fontSize: 14,
-    fontWeight: 'bold',
   },
   closeButton: {
     marginTop: 10,
