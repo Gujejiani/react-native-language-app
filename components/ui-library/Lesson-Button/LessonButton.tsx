@@ -50,7 +50,7 @@ const LessonButton: React.FC<{ progress: number; iconName: string; label?: strin
 
     // Animate the inner circle to jump down
     Animated.spring(positionY, {
-      toValue: 40, // Move down 10 units
+      toValue: 6, // Move down 10 units
       useNativeDriver: true,
     }).start();
 
@@ -96,14 +96,18 @@ const LessonButton: React.FC<{ progress: number; iconName: string; label?: strin
   }
 
   return (
+    <ThemedView>
+
+
     <TouchableOpacity
+      activeOpacity={1}
       style={styles.container}
       onPressIn={handlePressIn}
       onPressOut={handlePressOut}
     >
 
 
-<InfoModal title="Title" locked={false} visible={true} review={false}  description="Description" action={() => {modalActionHandler}} />
+{/* <InfoModal title="Title" locked={false} visible={true} review={false}  description="Description" action={() => {modalActionHandler}} /> */}
    
    
       {  label &&  (
@@ -118,7 +122,7 @@ const LessonButton: React.FC<{ progress: number; iconName: string; label?: strin
       
     ]}
   >
-    <ThemedView lightColor='white' style={styles.labelContent} >
+    <ThemedView lightColor='white' darkColor='white' style={styles.labelContent} >
       <View style={styles.labelArrow} />
       <ThemedText style={styles.labelText}>
         {label}
@@ -167,7 +171,12 @@ const LessonButton: React.FC<{ progress: number; iconName: string; label?: strin
           </View>
         </LinearGradient>
       </Animated.View>
+      <View style={styles.bounceEffect} >
+
+      </View>
     </TouchableOpacity>
+   
+    </ThemedView>
   );
 };
 
@@ -179,10 +188,21 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     position: 'relative',
   },
+  bounceEffect: {
+    height: SIZE /1.8 ,
+    backgroundColor: 'pink',
+  
+    width: SIZE / 1.65,
+    borderRadius: 100,
+    top: 28,
+    position: 'absolute',
+
+  },
   innerCircleWrapper: {
     position: 'absolute',
     width: SIZE - STROKE_WIDTH * 4, // Adjust size to fit the inner circle
     height: SIZE - STROKE_WIDTH * 4,
+    zIndex: 10,
   },
   innerCircle: {
     flex: 1, // Ensure the gradient fills the container
@@ -194,6 +214,7 @@ const styles = StyleSheet.create({
     elevation: 10,
     borderWidth: 1,
     borderColor: '#e0e0e0',
+    zIndex: 100,
   },
   iconContainer: {
     flex: 1,
