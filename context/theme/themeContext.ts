@@ -1,16 +1,16 @@
-import { ThemeType } from '@/models';
-import { createContext } from 'react';
+import { ThemeType } from "@/models";
+import { createContext } from "react";
 
 // Define the Theme Interface
 export interface ThemeInterface {
-    theme: ThemeType;
-    setTheme: () => void;
+  theme: ThemeType;
+  setTheme: () => void;
 }
 
 // Set initial theme and toggle function
 export const initialTheme: ThemeInterface = {
-    theme: 'light',
-    setTheme: () => {}
+  theme: "light",
+  setTheme: () => {},
 };
 
 // Create the Context

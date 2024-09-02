@@ -1,5 +1,3 @@
+export * from "./theme.model";
 
-
-export * from './theme.model'
-
-export * from './languages.model'
+export * from "./languages.model";

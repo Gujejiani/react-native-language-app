@@ -1,11 +1,9 @@
-import { View, Text } from "react-native"
-
-
+import { View, Text } from "react-native";
 
 export const Header = () => {
-
-
-    return <View >
-           <Text>Header</Text>
-        </View>
-}
+  return (
+    <View>
+      <Text>Header</Text>
+    </View>
+  );
+};
