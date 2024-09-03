@@ -51,9 +51,10 @@ const LessonButton: React.FC<{
     Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
 
     // Animate the inner circle to jump down
-    Animated.spring(positionY, {
+    Animated.timing(positionY, {
       toValue: 6, // Move down 10 units
       useNativeDriver: true,
+      duration: 50,
     }).start();
 
     if (label) {
@@ -63,7 +64,7 @@ const LessonButton: React.FC<{
 
   const handlePressOut = () => {
     // Animate the inner circle back to its original position
-    Animated.spring(positionY, {
+    Animated.timing(positionY, {
       toValue: 0, // Move back to the original position
       useNativeDriver: true,
     }).start();
