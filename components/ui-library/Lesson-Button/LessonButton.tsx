@@ -1,4 +1,8 @@
-import React, { useRef, useEffect, useState } from "react";
+
+
+
+
+import React, { useState } from "react";
 import { View, StyleSheet, TouchableOpacity, Animated } from "react-native";
 import Svg, { Circle } from "react-native-svg";
 import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
@@ -6,7 +10,8 @@ import * as Haptics from "expo-haptics";
 import { LinearGradient } from "expo-linear-gradient";
 import { ThemedView } from "@/components/ThemedView";
 import { ThemedText } from "@/components/ThemedText";
-import InfoModal from "../Info-modal/InfoModal";
+import { useLessonButtonAnimations } from "@/hooks/useLessonButtonAnimation";
+
 
 const SIZE = 100; // Button size
 const STROKE_WIDTH = 10; // Width of the progress ring
@@ -17,84 +22,33 @@ const LessonButton: React.FC<{
   progress: number;
   iconName: string;
   label?: string;
-}> = ({ progress = 0.75, iconName = "star", label }) => {
-  const radius = (SIZE - STROKE_WIDTH) / 2;
-  const circumference = radius * 2 * Math.PI;
-
-  const animatedProgress = useRef(new Animated.Value(0)).current;
-  const positionY = useRef(new Animated.Value(0)).current;
-  const labelAnimation = useRef(new Animated.Value(0)).current;
+  onPress?: () => void;
+}> = ({ progress = 0.75, iconName = "star", label, onPress }) => {
+  const {
+    animatedProgress,
+    positionY,
+    labelAnimation,
+    strokeDashoffset,
+    handlePressIn,
+    handlePressOut,
+  } = useLessonButtonAnimations(progress, label);
 
   const [showLabel, setShowLabel] = useState(true);
 
-  useEffect(() => {
-    if (label) {
-      Animated.loop(
-        Animated.sequence([
-          Animated.timing(labelAnimation, {
-            toValue: 6,
-            duration: 1000,
-            useNativeDriver: true,
-          }),
-          Animated.timing(labelAnimation, {
-            toValue: 0,
-            duration: 1000,
-            useNativeDriver: true,
-          }),
-        ]),
-      ).start();
-    }
-  }, [label]);
-
-  const handlePressIn = () => {
-    // Trigger haptic feedback
+  const onPressInHandler = () => {
     Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
-
-    // Animate the inner circle to jump down
-    Animated.timing(positionY, {
-      toValue: 6, // Move down 10 units
-      useNativeDriver: true,
-      duration: 50,
-    }).start();
-
-    if (label) {
-      setShowLabel(false);
-    }
+    handlePressIn();
+    if (label) setShowLabel(false);
+    if (onPress) onPress();
   };
 
-  const handlePressOut = () => {
-    // Animate the inner circle back to its original position
-    Animated.timing(positionY, {
-      toValue: 0, // Move back to the original position
-      useNativeDriver: true,
-    }).start();
-    let timer: any;
+  const onPressOutHandler = () => {
+    handlePressOut();
     if (label) {
-      timer = setTimeout(() => {
+      setTimeout(() => {
         setShowLabel(true);
       }, 1500);
     }
-
-    return () => {
-      clearTimeout(timer);
-    };
-  };
-
-  useEffect(() => {
-    Animated.timing(animatedProgress, {
-      toValue: progress,
-      duration: 1000,
-      useNativeDriver: false, // Set to false for SVG animations
-    }).start();
-  }, [progress]);
-
-  const strokeDashoffset = animatedProgress.interpolate({
-    inputRange: [0, 1],
-    outputRange: [circumference, 0],
-  });
-
-  const modalActionHandler = () => {
-    console.log("Action");
   };
 
   return (
@@ -102,11 +56,9 @@ const LessonButton: React.FC<{
       <TouchableOpacity
         activeOpacity={1}
         style={styles.container}
-        onPressIn={handlePressIn}
-        onPressOut={handlePressOut}
+        onPressIn={onPressInHandler}
+        onPressOut={onPressOutHandler}
       >
-        {/* <InfoModal title="Title" locked={false} visible={true} review={false}  description="Description" action={() => {modalActionHandler}} /> */}
-
         {label && (
           <Animated.View
             style={[
@@ -134,7 +86,7 @@ const LessonButton: React.FC<{
             fill="none"
             cx={SIZE / 2}
             cy={SIZE / 2}
-            r={radius}
+            r={(SIZE - STROKE_WIDTH) / 2}
             strokeWidth={STROKE_WIDTH}
           />
           <AnimatedCircle
@@ -142,9 +94,9 @@ const LessonButton: React.FC<{
             fill="none"
             cx={SIZE / 2}
             cy={SIZE / 2}
-            r={radius}
+            r={(SIZE - STROKE_WIDTH) / 2}
             strokeWidth={STROKE_WIDTH}
-            strokeDasharray={circumference}
+            strokeDasharray={2 * Math.PI * ((SIZE - STROKE_WIDTH) / 2)}
             strokeDashoffset={strokeDashoffset}
             strokeLinecap="round"
           />
@@ -171,6 +123,7 @@ const LessonButton: React.FC<{
     </ThemedView>
   );
 };
+
 
 const styles = StyleSheet.create({
   container: {
