@@ -1,12 +1,6 @@
+// Updated InfoModal component to accept coordinates and adjust the arrow position
 import React from "react";
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  StyleSheet,
-  Dimensions,
-  Modal,
-} from "react-native";
+import { View, Text, StyleSheet, Dimensions, Modal, TouchableWithoutFeedback } from "react-native";
 import Button from "../Button/Button";
 
 interface InfoModalProps {
@@ -15,9 +9,9 @@ interface InfoModalProps {
   description: string;
   action: () => void;
   onClose?: () => void;
+  buttonPosition: { x: number; y: number }; // Accept button position
   locked?: boolean;
-  review?: boolean;
-}
+  review?: boolean;}
 
 const screenWidth = Dimensions.get("window").width;
 
@@ -27,19 +21,28 @@ const InfoModal: React.FC<InfoModalProps> = ({
   description,
   action,
   onClose,
+  buttonPosition,
 }) => {
   if (!visible) return null;
 
+  // Calculate the arrow's left position relative to the modal
+  const arrowLeftPosition = buttonPosition.x + 10; // Add offset for arrow centering
+
   return (
+    <TouchableWithoutFeedback onPress={onClose}>
     <Modal
+
       transparent={true}
       visible={visible}
       animationType="fade"
       onRequestClose={onClose}
+      
+      
     >
-      <View style={styles.container}>
+     
+      <View  style={[styles.container, { top: buttonPosition.y + 10 }]}>
         <View style={styles.modalContent}>
-          <View style={styles.arrowContainer}>
+          <View style={[styles.arrowContainer, { left: arrowLeftPosition }]}>
             <View style={styles.arrow} />
           </View>
           <Text style={styles.title}>{title}</Text>
@@ -48,31 +51,28 @@ const InfoModal: React.FC<InfoModalProps> = ({
           <View style={styles.button}>
             <Button title="Start Lesson" onPress={action} />
           </View>
-          {/* <TouchableOpacity style={styles.closeButton} onPress={onClose}>
-            <Text style={styles.closeButtonText}>Close</Text>
-          </TouchableOpacity> */}
         </View>
       </View>
+   
     </Modal>
+    </TouchableWithoutFeedback>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    zIndex: 1000, // Ensure it's on top
-    top: 100,
-    backgroundColor: "rgba(0, 0, 0, 0.5)",
+    position: "absolute",
     left: 0,
+    right: 0,
+    justifyContent: "flex-start", // Align modal near the button
+    alignItems: "center",
+    zIndex: 1000,
+    height: "100%",
+ 
   },
   arrowContainer: {
     position: "absolute",
-    bottom: 60, // Adjust based on your design
-    width: 0,
-    height: 0,
-    alignItems: "center",
+    top: -10,
   },
   button: {
     width: "100%",
@@ -82,15 +82,16 @@ const styles = StyleSheet.create({
     height: 0,
     borderLeftWidth: 10,
     borderRightWidth: 10,
-    borderTopWidth: 10,
+    borderBottomWidth: 10,
     borderLeftColor: "transparent",
     borderRightColor: "transparent",
-    borderTopColor: "#34D399", // Green color matching the modal
+    borderBottomColor: "#34D399", // Green color matching the modal
   },
   modalContent: {
     backgroundColor: "#34D399", // Green background
     borderRadius: 16,
     padding: 16,
+    paddingTop: 30, // Add some padding at the top for the arrow
     width: screenWidth * 0.8, // Ensure modal takes up 80% of the screen width
     alignItems: "center",
     shadowColor: "#000",

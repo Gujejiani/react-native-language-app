@@ -1,7 +1,3 @@
-
-
-
-
 import React, { useState } from "react";
 import { View, StyleSheet, TouchableOpacity, Animated } from "react-native";
 import Svg, { Circle } from "react-native-svg";
@@ -11,7 +7,6 @@ import { LinearGradient } from "expo-linear-gradient";
 import { ThemedView } from "@/components/ThemedView";
 import { ThemedText } from "@/components/ThemedText";
 import { useLessonButtonAnimations } from "@/hooks/useLessonButtonAnimation";
-
 
 const SIZE = 100; // Button size
 const STROKE_WIDTH = 10; // Width of the progress ring
@@ -123,7 +118,6 @@ const LessonButton: React.FC<{
     </ThemedView>
   );
 };
-
 
 const styles = StyleSheet.create({
   container: {
