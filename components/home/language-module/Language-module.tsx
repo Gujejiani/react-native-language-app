@@ -44,7 +44,12 @@ export const LanguageModule: React.FC<LanguageModuleProps> = ({ module }) => {
 
       <View style={styles.module}>
         <View ref={buttonRef}>
-          <LessonButton iconName="star" progress={0.75} label="Start" onPress={buttonPressHandler} />
+          <LessonButton
+            iconName="star"
+            progress={0.75}
+            label="Start"
+            onPress={buttonPressHandler}
+          />
         </View>
         <View style={styles.modal}>
           <InfoModal

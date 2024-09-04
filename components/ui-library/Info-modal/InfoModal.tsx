@@ -1,6 +1,13 @@
 // Updated InfoModal component to accept coordinates and adjust the arrow position
 import React from "react";
-import { View, Text, StyleSheet, Dimensions, Modal, TouchableWithoutFeedback } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  Dimensions,
+  Modal,
+  TouchableWithoutFeedback,
+} from "react-native";
 import Button from "../Button/Button";
 
 interface InfoModalProps {
@@ -11,7 +18,8 @@ interface InfoModalProps {
   onClose?: () => void;
   buttonPosition: { x: number; y: number }; // Accept button position
   locked?: boolean;
-  review?: boolean;}
+  review?: boolean;
+}
 
 const screenWidth = Dimensions.get("window").width;
 
@@ -30,31 +38,26 @@ const InfoModal: React.FC<InfoModalProps> = ({
 
   return (
     <TouchableWithoutFeedback onPress={onClose}>
-    <Modal
+      <Modal
+        transparent={true}
+        visible={visible}
+        animationType="fade"
+        onRequestClose={onClose}
+      >
+        <View style={[styles.container, { top: buttonPosition.y + 10 }]}>
+          <View style={styles.modalContent}>
+            <View style={[styles.arrowContainer, { left: arrowLeftPosition }]}>
+              <View style={styles.arrow} />
+            </View>
+            <Text style={styles.title}>{title}</Text>
+            <Text style={styles.description}>{description}</Text>
 
-      transparent={true}
-      visible={visible}
-      animationType="fade"
-      onRequestClose={onClose}
-      
-      
-    >
-     
-      <View  style={[styles.container, { top: buttonPosition.y + 10 }]}>
-        <View style={styles.modalContent}>
-          <View style={[styles.arrowContainer, { left: arrowLeftPosition }]}>
-            <View style={styles.arrow} />
-          </View>
-          <Text style={styles.title}>{title}</Text>
-          <Text style={styles.description}>{description}</Text>
-
-          <View style={styles.button}>
-            <Button title="Start Lesson" onPress={action} />
+            <View style={styles.button}>
+              <Button title="Start Lesson" onPress={action} />
+            </View>
           </View>
         </View>
-      </View>
-   
-    </Modal>
+      </Modal>
     </TouchableWithoutFeedback>
   );
 };
@@ -68,7 +71,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     zIndex: 1000,
     height: "100%",
- 
   },
   arrowContainer: {
     position: "absolute",
