@@ -13,32 +13,31 @@ interface LanguageModuleProps {
 }
 
 export const LanguageModule: React.FC<LanguageModuleProps> = ({ module }) => {
+  const startLessonHandler = () => {
+    console.log("start lesson from module");
+  };
 
-  const startLessonHandler = () =>{
-    console.log('start lesson from module')
-  }
+  const moduleLessons = module.lessons.map((lesson, index) => {
+    const offset = index * 20; // Increase left or right offset progressively
 
- 
+    const isLeft = index % 2 !== 0;
 
-  const moduleLessons = module.lessons.map((lesson) => {
-    return (
-      <ThemedView key={lesson.id}>
-        <ThemedText>{lesson.name.en}</ThemedText>
-        <ThemedText>{lesson.description.en}</ThemedText>
+    return <ThemedView 
+    style={[styles.lesson,{ marginLeft: isLeft ? offset : 0, marginRight: !isLeft ? offset : 0 },
+    ]} 
+    
+    key={lesson.id}>
+       
+   
+        <Lesson  title={lesson.name.en} description={lesson.description.en} startLesson={startLessonHandler} />
+  
       </ThemedView>
-    );
+   
   });
 
   return (
     <ThemedView style={styles.moduleContainer}>
       <ModuleTitle title={module.name.en} />
-
-      <View style={styles.module}>
-      <Lesson startLesson={startLessonHandler} />
-      </View>
-      <View style={styles.module}>
-      <Lesson  startLesson={startLessonHandler} />
-      </View>
 
       {moduleLessons}
     </ThemedView>
@@ -47,12 +46,13 @@ export const LanguageModule: React.FC<LanguageModuleProps> = ({ module }) => {
 
 const styles = StyleSheet.create({
   moduleContainer: {
-    display: "flex",
+    marginTop: 40,
     width: "100%",
   },
-  modal: {
-    position: "absolute",
-  
+  lesson: {
+    // position: "absolute",
+    marginTop: 70,
+    alignItems: "center",
   },
   module: {
     position: "relative",
@@ -76,5 +76,11 @@ const styles = StyleSheet.create({
     height: 1,
     backgroundColor: "gray",
     marginHorizontal: 10,
+  },
+  left: {
+    alignSelf: 'flex-start', // Aligns the lesson to the left
+  },
+  right: {
+    alignSelf: 'flex-end', // Aligns the lesson to the right
   },
 });

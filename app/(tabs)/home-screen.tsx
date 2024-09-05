@@ -24,7 +24,12 @@ export default function HomeScreen() {
       <HomeScreenHeader></HomeScreenHeader>
 
       <ThemedView>
-        <LanguageModule module={modules[0]}></LanguageModule>
+        {
+          modules.map((module)=>{
+           return <LanguageModule key={module.id} module={module}></LanguageModule>
+          })
+        }
+       
       </ThemedView>
     </ParallaxScrollView>
   );
