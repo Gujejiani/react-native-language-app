@@ -15,7 +15,7 @@ interface InfoModalProps {
   title: string;
   description: string;
   action: () => void;
-  onClose?: () => void;
+  onClose: () => void;
   buttonPosition: { x: number; y: number }; // Accept button position
   locked?: boolean;
   review?: boolean;
@@ -36,6 +36,8 @@ const InfoModal: React.FC<InfoModalProps> = ({
   // Calculate the arrow's left position relative to the modal
   const arrowLeftPosition = buttonPosition.x + 10; // Add offset for arrow centering
 
+
+
   return (
     <TouchableWithoutFeedback onPress={onClose}>
       <Modal
@@ -44,6 +46,11 @@ const InfoModal: React.FC<InfoModalProps> = ({
         animationType="fade"
         onRequestClose={onClose}
       >
+
+<TouchableWithoutFeedback onPress={onClose}>
+        <View   style={styles.overlay} >
+
+   
         <View style={[styles.container, { top: buttonPosition.y + 10 }]}>
           <View style={styles.modalContent}>
             <View style={[styles.arrowContainer, { left: arrowLeftPosition }]}>
@@ -57,12 +64,20 @@ const InfoModal: React.FC<InfoModalProps> = ({
             </View>
           </View>
         </View>
+        </View>
+
+        </TouchableWithoutFeedback>
       </Modal>
     </TouchableWithoutFeedback>
   );
 };
 
 const styles = StyleSheet.create({
+  overlay: {
+    backgroundColor: "rgba(0,0,0,0.5)",
+    height: "100%",
+
+  },
   container: {
     position: "absolute",
     left: 0,
@@ -71,6 +86,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
     zIndex: 1000,
     height: "100%",
+
+    
   },
   arrowContainer: {
     position: "absolute",

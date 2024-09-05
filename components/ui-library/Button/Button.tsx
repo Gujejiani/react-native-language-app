@@ -13,7 +13,11 @@ const Button: React.FC<{ title: string; onPress: () => void }> = ({
     setBounce(false);
 
     Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
-    onPress();
+    // todo fix this
+    setTimeout(()=>{
+      onPress();
+    }, 400)
+   
   };
 
   const handlePressOut = () => {
