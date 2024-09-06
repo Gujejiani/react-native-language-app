@@ -22,17 +22,25 @@ export const LanguageModule: React.FC<LanguageModuleProps> = ({ module }) => {
 
     const isLeft = index % 2 !== 0;
 
-    return <ThemedView 
-    style={[styles.lesson,{ marginLeft: isLeft ? offset : 0, marginRight: !isLeft ? offset : 0 },
-    ]} 
-    
-    key={lesson.id}>
-       
-   
-        <Lesson  title={lesson.name.en} description={lesson.description.en} startLesson={startLessonHandler} />
-  
+    return (
+      <ThemedView
+        style={[
+          styles.lesson,
+          {
+            marginLeft: isLeft ? offset : 0,
+            marginRight: !isLeft ? offset : 0,
+          },
+        ]}
+        key={lesson.id}
+      >
+        <Lesson
+          lesson={lesson}
+          title={lesson.name.en}
+          description={lesson.description.en}
+          startLesson={startLessonHandler}
+        />
       </ThemedView>
-   
+    );
   });
 
   return (
@@ -78,9 +86,9 @@ const styles = StyleSheet.create({
     marginHorizontal: 10,
   },
   left: {
-    alignSelf: 'flex-start', // Aligns the lesson to the left
+    alignSelf: "flex-start", // Aligns the lesson to the left
   },
   right: {
-    alignSelf: 'flex-end', // Aligns the lesson to the right
+    alignSelf: "flex-end", // Aligns the lesson to the right
   },
 });

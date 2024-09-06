@@ -12,6 +12,7 @@ export const modulesMock: IModule[] = [
     icon: "https://example.com/icons/module1.png",
     lessons: [
       {
+        status: 'unlocked',
         id: 1,
         name: { en: "TypeScript Fundamentals", es: "Lección 1" },
         description: {
@@ -67,6 +68,7 @@ export const modulesMock: IModule[] = [
       },
       {
         id: 2,
+        status: 'locked',
         name: { en: "Basic Types", es: "Lección 2" },
         description: {
           en: "TypeScript basic types",
@@ -83,6 +85,7 @@ export const modulesMock: IModule[] = [
 
       {
         id: 3,
+        status: 'locked',
         name: { en: "Primitive types", es: "Lección 2" },
         description: {
           en: "Do you know the primitive types?",
@@ -98,6 +101,7 @@ export const modulesMock: IModule[] = [
       },
       {
         id: 4,
+        status: 'locked',
         name: { en: "OOP", es: "Lección 2" },
         description: {
           en: "Object Oriented Programming",
@@ -113,6 +117,7 @@ export const modulesMock: IModule[] = [
       },
       {
         id: 5,
+        status: 'locked',
         name: { en: "Single Responsability", es: "Lección 2" },
         description: {
           en: "What Is Single Responsability Principle",
@@ -143,6 +148,7 @@ export const modulesMock: IModule[] = [
           en: "Getting started with TypeScript",
           es: "Empezando con TypeScript",
         },
+        status: 'unlocked',
         imageUrl: "https://example.com/images/lesson1.png",
         icon: "https://example.com/icons/lesson1.png",
         content: "This is a text content for the lesson.",
@@ -204,6 +210,7 @@ export const modulesMock: IModule[] = [
           url: "https://example.com/videos/lesson2.mp4",
         },
         challenges: [],
+        status: 'locked'
       },
 
       {
@@ -220,6 +227,7 @@ export const modulesMock: IModule[] = [
           url: "https://example.com/videos/lesson2.mp4",
         },
         challenges: [],
+        status: 'locked'
       },
       {
         id: 4,
@@ -235,6 +243,7 @@ export const modulesMock: IModule[] = [
           url: "https://example.com/videos/lesson2.mp4",
         },
         challenges: [],
+        status: 'locked'
       },
       {
         id: 5,
@@ -250,6 +259,7 @@ export const modulesMock: IModule[] = [
           url: "https://example.com/videos/lesson2.mp4",
         },
         challenges: [],
+        status: 'locked'
       },
     ],
     count: 1,

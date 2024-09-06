@@ -1,18 +1,24 @@
 import { ThemedView } from "@/components/ThemedView";
 import InfoModal from "@/components/ui-library/Info-modal/InfoModal";
 import LessonButton from "@/components/ui-library/Lesson-Button/LessonButton";
+import { ILesson } from "@/models";
 import { useRef, useState } from "react";
 import { StyleSheet, View } from "react-native";
 
 interface LessonProps {
-  lesson?: any;
+  lesson: ILesson;
   startLesson: () => void;
 
   title: string;
   description: string;
 }
 
-const Lesson: React.FC<LessonProps> = ({ lesson, startLesson, title, description }) => {
+const Lesson: React.FC<LessonProps> = ({
+  lesson,
+  startLesson,
+  title,
+  description,
+}) => {
   const [buttonPosition, setButtonPosition] = useState({ x: 0, y: 0 });
   const [showModal, setShowModal] = useState(false);
 
@@ -40,7 +46,8 @@ const Lesson: React.FC<LessonProps> = ({ lesson, startLesson, title, description
         <LessonButton
           iconName="star"
           progress={0.75}
-          label="Start"
+          label={lesson.status ==='unlocked'? 'Start': ''}
+          disabled={lesson.status === 'locked'}
           onPress={buttonPressHandler}
         />
       </View>
