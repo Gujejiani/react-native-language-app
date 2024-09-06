@@ -46,8 +46,8 @@ const Lesson: React.FC<LessonProps> = ({
         <LessonButton
           iconName="star"
           progress={0.75}
-          label={lesson.status ==='unlocked'? 'Start': ''}
-          disabled={lesson.status === 'locked'}
+          label={lesson.status === "unlocked" ? "Start" : ""}
+          disabled={lesson.status === "locked"}
           onPress={buttonPressHandler}
         />
       </View>

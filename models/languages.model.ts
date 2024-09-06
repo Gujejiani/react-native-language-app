@@ -45,7 +45,7 @@ export interface ILesson {
   content: string | MultimediaContent;
   challenges: IChallenge[]; // Unified concept for tasks and exams
 
-  status: LessonStatus
+  status: LessonStatus;
 }
 
 export type LessonStatus = "locked" | "unlocked" | "completed";

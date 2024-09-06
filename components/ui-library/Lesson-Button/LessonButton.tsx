@@ -18,7 +18,7 @@ const LessonButton: React.FC<{
   iconName: string;
   label?: string;
   onPress?: () => void;
-  disabled?:boolean
+  disabled?: boolean;
 }> = ({ progress = 0.75, iconName = "star", label, onPress }) => {
   const {
     animatedProgress,
