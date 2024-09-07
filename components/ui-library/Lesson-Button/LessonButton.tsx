@@ -86,7 +86,7 @@ const LessonButton: React.FC<{
             strokeWidth={STROKE_WIDTH}
           />
           <AnimatedCircle
-            stroke={disabled ? '#b3c7f7': "#3b82f6"}
+            stroke={disabled ? "#b3c7f7" : "#3b82f6"}
             fill="none"
             cx={SIZE / 2}
             cy={SIZE / 2}
@@ -106,7 +106,7 @@ const LessonButton: React.FC<{
           ]}
         >
           <LinearGradient
-            colors={ disabled? ["#e0bfd8", "#d9a7b1"]: ["#ff7eeb", "#ff61a6"]} // Pink gradient colors
+            colors={disabled ? ["#e0bfd8", "#d9a7b1"] : ["#ff7eeb", "#ff61a6"]} // Pink gradient colors
             style={styles.innerCircle}
           >
             <View style={styles.iconContainer}>

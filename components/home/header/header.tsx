@@ -54,8 +54,6 @@ const styles = StyleSheet.create({
     top: 40,
     paddingVertical: 20,
     paddingHorizontal: 20,
-   
-
   },
   sideBySide: {
     display: "flex",

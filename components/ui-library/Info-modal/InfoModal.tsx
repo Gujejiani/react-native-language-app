@@ -10,7 +10,6 @@ import {
 import Button from "../Button/Button";
 import { Colors } from "@/constants/Colors";
 
-
 interface InfoModalProps {
   visible: boolean;
   title: string;
@@ -42,38 +41,36 @@ const InfoModal: React.FC<InfoModalProps> = ({
 
   const preventClose = (e: any) => {
     e.stopPropagation();
-  }
+  };
 
   return (
     <TouchableWithoutFeedback onPress={onClose}>
-      <Modal
-        transparent={true}
-        visible={visible}
-        animationType="fade"
-       
-      >
+      <Modal transparent={true} visible={visible} animationType="fade">
         <TouchableWithoutFeedback onPress={onClose}>
           <View style={styles.overlay}>
             <View style={[styles.container, { top: buttonPosition.y + 10 }]}>
               <TouchableWithoutFeedback onPress={preventClose}>
-              <View  style={[styles.modalContent, locked? styles.locked: {}]}>
+                <View
+                  style={[styles.modalContent, locked ? styles.locked : {}]}
+                >
                   <View
-                      style={[styles.arrowContainer, { left: arrowLeftPosition }]}
-                    >
-                      <View style={[styles.arrow, locked? styles.lockedArrow: {} ] } />
-                    </View>
-                    <Text style={styles.title}>{title}</Text>
-                    <Text style={styles.description}>{description}</Text>
+                    style={[styles.arrowContainer, { left: arrowLeftPosition }]}
+                  >
+                    <View
+                      style={[styles.arrow, locked ? styles.lockedArrow : {}]}
+                    />
+                  </View>
+                  <Text style={styles.title}>{title}</Text>
+                  <Text style={styles.description}>{description}</Text>
 
-                    <View style={styles.button}>
-                      <Button
-                        title={buttonText}
-                        onPress={action} 
-                       
-                        disabled={locked} 
-                      />
-                    </View>
-              </View>   
+                  <View style={styles.button}>
+                    <Button
+                      title={buttonText}
+                      onPress={action}
+                      disabled={locked}
+                    />
+                  </View>
+                </View>
               </TouchableWithoutFeedback>
             </View>
           </View>
@@ -105,9 +102,7 @@ const styles = StyleSheet.create({
     width: "100%",
   },
   lockedArrow: {
-
-    borderBottomColor: Colors.light.locked, 
-
+    borderBottomColor: Colors.light.locked,
   },
   arrow: {
     width: 0,
@@ -133,8 +128,7 @@ const styles = StyleSheet.create({
     elevation: 5,
   },
   locked: {
-    backgroundColor:Colors.light.locked, 
-   
+    backgroundColor: Colors.light.locked,
   },
   title: {
     color: "#ffffff",
@@ -162,7 +156,6 @@ const styles = StyleSheet.create({
   actionButton: {
     backgroundColor: "#34D399", // Active button color
   },
-  
 });
 
 export default InfoModal;

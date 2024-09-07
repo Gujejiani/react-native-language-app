@@ -27,24 +27,22 @@ export default function HomeScreen() {
     //   }
     // >
     <ThemedView>
-           <HomeScreenHeader></HomeScreenHeader>
-  <Animated.ScrollView >
- 
-
-      <ThemedView>
-        {modules.map((module) => {
-          return (
-            <LanguageModule key={module.id} module={module}></LanguageModule>
-          );
-        })}
-      </ThemedView>
-
+      <HomeScreenHeader></HomeScreenHeader>
+      <Animated.ScrollView>
+        <ThemedView>
+          {modules.map((module) => {
+            return (
+              <LanguageModule key={module.id} module={module}></LanguageModule>
+            );
+          })}
+        </ThemedView>
       </Animated.ScrollView>
-  
-      </ThemedView>
+    </ThemedView>
   );
 }
-  {/* </ParallaxScrollView> */}
+{
+  /* </ParallaxScrollView> */
+}
 
 const styles = StyleSheet.create({
   titleContainer: {
