@@ -3,12 +3,11 @@ import InfoModal from "@/components/ui-library/Info-modal/InfoModal";
 import LessonButton from "@/components/ui-library/Lesson-Button/LessonButton";
 import { ILesson } from "@/models";
 import { useRef, useState } from "react";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 
 interface LessonProps {
   lesson: ILesson;
   startLesson: () => void;
-
   title: string;
   description: string;
 }
@@ -31,7 +30,7 @@ const Lesson: React.FC<LessonProps> = ({
   };
   const closeModal = () => {
     setShowModal(false);
-    console.log("Close  Modal");
+    console.log("Close  Modal FROM MEE");
   };
 
   const startLessonHandler = () => {
@@ -59,6 +58,8 @@ const Lesson: React.FC<LessonProps> = ({
           action={startLessonHandler}
           buttonPosition={buttonPosition}
           onClose={closeModal}
+          locked={lesson.status === "locked"}
+          buttonText={lesson.status === "locked" ? "Locked" : "Start Lesson"}
         />
       </View>
     </ThemedView>

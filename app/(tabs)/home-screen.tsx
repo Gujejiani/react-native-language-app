@@ -8,20 +8,28 @@ import HomeScreenHeader from "@/components/home/header/Header";
 import { modulesMock } from "@/mock/language.mock";
 import { LanguageModule } from "@/components/home/language-module/Language-module";
 import { IModule } from "@/models";
-
+import Animated, {
+  interpolate,
+  useAnimatedRef,
+  useAnimatedStyle,
+  useScrollViewOffset,
+} from "react-native-reanimated";
 export default function HomeScreen() {
   const modules: IModule[] = modulesMock;
   return (
-    <ParallaxScrollView
-      headerBackgroundColor={{ light: "#A1CEDC", dark: "#1D3D47" }}
-      headerImage={
-        <Image
-          source={require("@/assets/images/partial-react-logo.png")}
-          style={styles.reactLogo}
-        />
-      }
-    >
-      <HomeScreenHeader></HomeScreenHeader>
+    // <ParallaxScrollView
+    //   headerBackgroundColor={{ light: "#A1CEDC", dark: "#1D3D47" }}
+    //   headerImage={
+    //     <Image
+    //       source={require("@/assets/images/partial-react-logo.png")}
+    //       style={styles.reactLogo}
+    //     />
+    //   }
+    // >
+    <ThemedView>
+           <HomeScreenHeader></HomeScreenHeader>
+  <Animated.ScrollView >
+ 
 
       <ThemedView>
         {modules.map((module) => {
@@ -30,9 +38,13 @@ export default function HomeScreen() {
           );
         })}
       </ThemedView>
-    </ParallaxScrollView>
+
+      </Animated.ScrollView>
+  
+      </ThemedView>
   );
 }
+  {/* </ParallaxScrollView> */}
 
 const styles = StyleSheet.create({
   titleContainer: {

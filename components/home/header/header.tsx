@@ -49,6 +49,13 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
+    width: "100%",
+    zIndex: 100,
+    top: 40,
+    paddingVertical: 20,
+    paddingHorizontal: 20,
+   
+
   },
   sideBySide: {
     display: "flex",

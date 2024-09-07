@@ -2,14 +2,20 @@ import { ThemedText } from "@/components/ThemedText";
 import { useState } from "react";
 import { StyleSheet, View, TouchableOpacity } from "react-native";
 import * as Haptics from "expo-haptics";
+import Fontisto from '@expo/vector-icons/Fontisto';
 
-const Button: React.FC<{ title: string; onPress: () => void }> = ({
+const Button: React.FC<{   style?: {}, disabled?: boolean, title: string; onPress: () => void }> = ({
   title,
   onPress,
+  disabled,
+  style
 }) => {
   const [bounce, setBounce] = useState(true);
 
-  const handlePress = () => {
+  const handlePress = (e: any) => {
+
+    e.stopPropagation();
+    if(disabled) return;
     setBounce(false);
 
     Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
@@ -24,25 +30,37 @@ const Button: React.FC<{ title: string; onPress: () => void }> = ({
   };
 
   return (
-    <View>
+    <View  >
       <TouchableOpacity
         onPressIn={handlePress}
         onPressOut={handlePressOut}
         activeOpacity={1}
-        style={[styles.button, !bounce ? styles.bounceEffect : {}]}
-        onPress={onPress}
+        disabled={disabled}
+      
+        
+        style={[styles.button, !bounce ? styles.bounceEffect : {}, disabled ? styles.disabledButton : {}, style]}
+       
       >
-        <ThemedText style={styles.buttonText}> {title} </ThemedText>
+ 
+        <ThemedText style={[styles.buttonText, disabled ? styles.disabledColor : {} ]}> {title} 
+
+        <View  >
+         {disabled? <Fontisto  style={styles.iconColor} name="locked" size={20} color="black" />: '' }
+         </View>
+        </ThemedText>
+      
       </TouchableOpacity>
-      <View style={styles.shadowEffect}></View>
+      <View style={[styles.shadowEffect, disabled ? styles.hideShadow : {}]}></View>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
+  
   bounceEffect: {
     top: 8,
   },
+  
   shadowEffect: {
     backgroundColor: "#F0F0F0",
     width: "100%",
@@ -50,6 +68,9 @@ const styles = StyleSheet.create({
     borderRadius: 8,
 
     bottom: 14,
+  },
+  hideShadow: {
+    backgroundColor: 'transparent',
   },
   button: {
     backgroundColor: "#ffffff",
@@ -59,12 +80,27 @@ const styles = StyleSheet.create({
     width: "100%",
     zIndex: 4,
   },
+  disabledButton: {
+    opacity: 0.8,
+    
+  
+  },
   buttonText: {
     color: "#34D399", // Green color
     fontSize: 16,
     fontWeight: "bold",
     textAlign: "center",
   },
+
+  iconColor: {
+    color: "#D1D5DB",
+    marginLeft: 10,
+   
+  },
+
+  disabledColor: {
+    color: "#D1D5DB",
+  }
 });
 
 export default Button;
