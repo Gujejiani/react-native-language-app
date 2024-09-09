@@ -4,12 +4,15 @@ import LessonButton from "@/components/ui-library/Lesson-Button/LessonButton";
 import { ILesson } from "@/models";
 import { useRef, useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
+import Animated from "react-native-reanimated";
 
 interface LessonProps {
   lesson: ILesson;
   startLesson: () => void;
   title: string;
   description: string;
+  scrollViewRef: React.RefObject<Animated.ScrollView>;
+  scrollY: number; // Receive shared scroll value
 }
 
 const Lesson: React.FC<LessonProps> = ({
@@ -17,6 +20,8 @@ const Lesson: React.FC<LessonProps> = ({
   startLesson,
   title,
   description,
+  scrollViewRef,
+  scrollY,
 }) => {
   const [buttonPosition, setButtonPosition] = useState({ x: 0, y: 0 });
   const [showModal, setShowModal] = useState(false);
@@ -51,16 +56,22 @@ const Lesson: React.FC<LessonProps> = ({
         />
       </View>
       <View style={styles.modal}>
-        <InfoModal
-          visible={showModal}
-          title={title}
-          description={description}
-          action={startLessonHandler}
-          buttonPosition={buttonPosition}
-          onClose={closeModal}
-          locked={lesson.status === "locked"}
-          buttonText={lesson.status === "locked" ? "Locked" : "Start Lesson"}
-        />
+        {showModal ? (
+          <InfoModal
+            visible={showModal}
+            title={title}
+            scrollViewRef={scrollViewRef} 
+            scrollY={scrollY} 
+            description={description}
+            action={startLessonHandler}
+            buttonPosition={buttonPosition}
+            onClose={closeModal}
+            locked={lesson.status === "locked"}
+            buttonText={lesson.status === "locked" ? "Locked" : "Start Lesson"}
+          />
+        ) : (
+          ""
+        )}
       </View>
     </ThemedView>
   );
@@ -72,7 +83,7 @@ const styles = StyleSheet.create({
     width: "100%",
   },
   modal: {
-    position: "absolute",
+    position: "relative",
   },
   titleContainer: {
     display: "flex",

@@ -9,13 +9,17 @@ import { modulesMock } from "@/mock/language.mock";
 import { LanguageModule } from "@/components/home/language-module/Language-module";
 import { IModule } from "@/models";
 import Animated, {
-  interpolate,
-  useAnimatedRef,
-  useAnimatedStyle,
-  useScrollViewOffset,
 } from "react-native-reanimated";
+
+import { useRef, useState } from "react";
 export default function HomeScreen() {
   const modules: IModule[] = modulesMock;
+  const scrollRef = useRef<Animated.ScrollView>(null);
+
+  const [currentScrollY, setCurrentScrollY] = useState(0);
+
+
+
   return (
     // <ParallaxScrollView
     //   headerBackgroundColor={{ light: "#A1CEDC", dark: "#1D3D47" }}
@@ -28,11 +32,22 @@ export default function HomeScreen() {
     // >
     <ThemedView>
       <HomeScreenHeader></HomeScreenHeader>
-      <Animated.ScrollView>
-        <ThemedView>
+      <Animated.ScrollView
+        onScroll={(event) => {
+          setCurrentScrollY(event.nativeEvent.contentOffset.y);
+        }}
+        ref={scrollRef}
+    
+      >
+        <ThemedView style={styles.container}>
           {modules.map((module) => {
             return (
-              <LanguageModule key={module.id} module={module}></LanguageModule>
+              <LanguageModule
+                scrollY={currentScrollY}
+                scrollViewRef={scrollRef}
+                key={module.id}
+                module={module}
+              ></LanguageModule>
             );
           })}
         </ThemedView>
@@ -45,20 +60,7 @@ export default function HomeScreen() {
 }
 
 const styles = StyleSheet.create({
-  titleContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    gap: 8,
-  },
-  stepContainer: {
-    gap: 8,
-    marginBottom: 8,
-  },
-  reactLogo: {
-    height: 178,
-    width: 290,
-    bottom: 0,
-    left: 0,
-    position: "absolute",
+  container: {
+    paddingBottom: 350,
   },
 });

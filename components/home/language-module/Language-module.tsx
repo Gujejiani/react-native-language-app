@@ -14,11 +14,13 @@ interface LanguageModuleProps {
   module: IModule;
   scrollViewRef: React.RefObject<Animated.ScrollView>;
   scrollY: number; // Receive shared scroll value
-
-
 }
 
-export const LanguageModule: React.FC<LanguageModuleProps> = ({ module, scrollViewRef, scrollY }) => {
+export const LanguageModule: React.FC<LanguageModuleProps> = ({
+  module,
+  scrollViewRef,
+  scrollY,
+}) => {
   const startLessonHandler = () => {
     console.log("start lesson from module");
   };
@@ -40,8 +42,8 @@ export const LanguageModule: React.FC<LanguageModuleProps> = ({ module, scrollVi
         key={lesson.id}
       >
         <Lesson
-        scrollViewRef={scrollViewRef}
-        scrollY={scrollY}
+          scrollViewRef={scrollViewRef}
+          scrollY={scrollY}
           lesson={lesson}
           title={lesson.name.en}
           description={lesson.description.en}
