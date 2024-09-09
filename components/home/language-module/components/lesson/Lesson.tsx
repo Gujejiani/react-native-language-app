@@ -60,8 +60,8 @@ const Lesson: React.FC<LessonProps> = ({
           <InfoModal
             visible={showModal}
             title={title}
-            scrollViewRef={scrollViewRef} 
-            scrollY={scrollY} 
+            scrollViewRef={scrollViewRef}
+            scrollY={scrollY}
             description={description}
             action={startLessonHandler}
             buttonPosition={buttonPosition}

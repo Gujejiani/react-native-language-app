@@ -8,8 +8,7 @@ import HomeScreenHeader from "@/components/home/header/Header";
 import { modulesMock } from "@/mock/language.mock";
 import { LanguageModule } from "@/components/home/language-module/Language-module";
 import { IModule } from "@/models";
-import Animated, {
-} from "react-native-reanimated";
+import Animated from "react-native-reanimated";
 
 import { useRef, useState } from "react";
 export default function HomeScreen() {
@@ -17,8 +16,6 @@ export default function HomeScreen() {
   const scrollRef = useRef<Animated.ScrollView>(null);
 
   const [currentScrollY, setCurrentScrollY] = useState(0);
-
-
 
   return (
     // <ParallaxScrollView
@@ -37,7 +34,6 @@ export default function HomeScreen() {
           setCurrentScrollY(event.nativeEvent.contentOffset.y);
         }}
         ref={scrollRef}
-    
       >
         <ThemedView style={styles.container}>
           {modules.map((module) => {

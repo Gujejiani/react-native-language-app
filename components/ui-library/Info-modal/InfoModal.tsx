@@ -23,7 +23,7 @@ interface InfoModalProps {
   review?: boolean;
   buttonText: string;
   scrollViewRef: React.RefObject<Animated.ScrollView>;
-  scrollY: number; 
+  scrollY: number;
 }
 
 const screenWidth = Dimensions.get("window").width;
@@ -43,17 +43,20 @@ const InfoModal: React.FC<InfoModalProps> = ({
   const [modalTopOffset, setModalTopOffset] = useState(0); // State for position adjustment
   const modalContentRef = useRef<View>(null);
 
- 
-
   useEffect(() => {
     let timer = null;
     if (visible) {
       // Add a slight delay to ensure that the modal is fully rendered before checking visibility
-    timer =  setTimeout(() => {
-        checkIfModalIsFullyVisible(modalContentRef, setModalTopOffset, scrollViewRef, scrollY);
+      timer = setTimeout(() => {
+        checkIfModalIsFullyVisible(
+          modalContentRef,
+          setModalTopOffset,
+          scrollViewRef,
+          scrollY,
+        );
       }, 100);
     }
-    ()=> timer && clearTimeout(timer);
+    () => timer && clearTimeout(timer);
   }, [visible]);
 
   if (!visible) return null;
@@ -63,7 +66,7 @@ const InfoModal: React.FC<InfoModalProps> = ({
   };
 
   // Calculate the arrow's left position relative to the modal
-  const arrowLeftPosition = buttonPosition.x; 
+  const arrowLeftPosition = buttonPosition.x;
 
   return (
     <TouchableWithoutFeedback onPress={onClose}>
@@ -71,7 +74,13 @@ const InfoModal: React.FC<InfoModalProps> = ({
         transparent={true}
         visible={visible}
         animationType="fade"
-        onShow={() =>         checkIfModalIsFullyVisible(modalContentRef, setModalTopOffset, scrollViewRef, scrollY)
+        onShow={() =>
+          checkIfModalIsFullyVisible(
+            modalContentRef,
+            setModalTopOffset,
+            scrollViewRef,
+            scrollY,
+          )
         }
       >
         <TouchableWithoutFeedback onPress={onClose}>
@@ -80,12 +89,11 @@ const InfoModal: React.FC<InfoModalProps> = ({
               style={[
                 styles.container,
                 { top: buttonPosition.y + 10 - modalTopOffset },
-              ]} 
+              ]}
             >
               <TouchableWithoutFeedback onPress={preventClose}>
                 <View
                   ref={modalContentRef}
-                 
                   style={[styles.modalContent, locked ? styles.locked : {}]}
                 >
                   <View
