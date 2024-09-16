@@ -11,6 +11,7 @@ import { IModule } from "@/models";
 import Animated from "react-native-reanimated";
 
 import { useRef, useState } from "react";
+import SectionHeader from "@/components/home/language-module/components/section-header/SectionHeader";
 export default function HomeScreen() {
   const modules: IModule[] = modulesMock;
   const scrollRef = useRef<Animated.ScrollView>(null);
@@ -29,6 +30,8 @@ export default function HomeScreen() {
     // >
     <ThemedView>
       <HomeScreenHeader></HomeScreenHeader>
+      
+      <SectionHeader   title="Fake Title " description="fake desc"  ></SectionHeader>
       <Animated.ScrollView
         onScroll={(event) => {
           setCurrentScrollY(event.nativeEvent.contentOffset.y);

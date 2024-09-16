@@ -40,6 +40,6 @@ const styles = StyleSheet.create({
     flex: 1,
     height: 1,
 
-    marginHorizontal: 10,
+    marginHorizontal: 16
   },
 });

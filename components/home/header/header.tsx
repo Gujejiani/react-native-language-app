@@ -53,7 +53,7 @@ const styles = StyleSheet.create({
     zIndex: 100,
     top: 40,
     paddingVertical: 20,
-    paddingHorizontal: 20,
+    paddingHorizontal: 16,
   },
   sideBySide: {
     display: "flex",

@@ -1,10 +1,7 @@
-import { ThemedText } from "@/components/ThemedText";
 import { ThemedView } from "@/components/ThemedView";
 import { IModule } from "@/models/";
 import React, { useState, useRef, useEffect } from "react";
 import { StyleSheet, View, findNodeHandle } from "react-native";
-import LessonButton from "@/components/ui-library/Lesson-Button/LessonButton";
-import InfoModal from "@/components/ui-library/Info-modal/InfoModal";
 import ModuleTitle from "./components/module-title/ModuleTitle";
 import Lesson from "./components/lesson/Lesson";
 import { ScrollView } from "react-native-gesture-handler";

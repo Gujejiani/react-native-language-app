@@ -62,7 +62,7 @@ const Button: React.FC<{
         </ThemedText>
       </TouchableOpacity>
       <View
-        style={[styles.shadowEffect, disabled ? styles.hideShadow : {}]}
+        style={[styles.pressEffect, disabled ? styles.hideShadow : {}]}
       ></View>
     </View>
   );
@@ -73,7 +73,7 @@ const styles = StyleSheet.create({
     top: 8,
   },
 
-  shadowEffect: {
+  pressEffect: {
     backgroundColor: "#F0F0F0",
     width: "100%",
     height: 20,
