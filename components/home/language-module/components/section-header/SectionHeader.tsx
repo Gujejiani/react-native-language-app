@@ -1,43 +1,45 @@
 import { ThemedText } from "@/components/ThemedText";
 import { ThemedView } from "@/components/ThemedView";
 import { StyleSheet, View } from "react-native";
-import FontAwesome from '@expo/vector-icons/FontAwesome';
-import BounceButton from '../../../../ui-library/bounce-button/BounceButton';
+import FontAwesome from "@expo/vector-icons/FontAwesome";
+import BounceButton from "../../../../ui-library/bounce-button/BounceButton";
 import { LanguageBackground } from "@/models";
 
 interface SectionHeaderProps {
   title: string;
   description: string;
   onPress?: () => void;
-  sectionBackgroundColor?:  LanguageBackground;  // Add sectionId or sectionType prop
+  sectionBackgroundColor?: LanguageBackground; // Add sectionId or sectionType prop
 }
 
-const SectionHeader: React.FC<SectionHeaderProps> = ({ title, description, onPress, sectionBackgroundColor }) => {
-  
- 
-
+const SectionHeader: React.FC<SectionHeaderProps> = ({
+  title,
+  description,
+  onPress,
+  sectionBackgroundColor,
+}) => {
   const handlePress = () => {
-    console.log('section header pressed');
+    console.log("section header pressed");
   };
 
   return (
     <ThemedView style={styles.container}>
       <ThemedView style={styles.content}>
         <ThemedView style={styles.infoWrapper}>
-          <BounceButton 
-            style={{...styles.info, backgroundColor: sectionBackgroundColor}}
+          <BounceButton
+            style={{ ...styles.info, backgroundColor: sectionBackgroundColor }}
             pressEffectStyle={styles.infoPressEffect}
             onPress={handlePress}
           >
-            <ThemedText style={styles.description} > { description} </ThemedText>
-            <ThemedText style={styles.title}   > {title} </ThemedText>
+            <ThemedText style={styles.description}> {description} </ThemedText>
+            <ThemedText style={styles.title}> {title} </ThemedText>
           </BounceButton>
         </ThemedView>
-        <BounceButton 
+        <BounceButton
           onPress={handlePress}
-          style={{...styles.guide,  backgroundColor: sectionBackgroundColor}} 
+          style={{ ...styles.guide, backgroundColor: sectionBackgroundColor }}
           pressEffectStyle={styles.guidePressEffect}
-        > 
+        >
           <ThemedText>
             <FontAwesome name="book" size={24} color="white" />
           </ThemedText>
@@ -64,36 +66,35 @@ const styles = StyleSheet.create({
   infoPressEffect: {
     borderTopRightRadius: 0,
     borderBottomRightRadius: 0,
-    left: 1
+    left: 1,
   },
   guidePressEffect: {
     borderTopLeftRadius: 0,
     borderBottomLeftRadius: 0,
-    borderBottomRightRadius: 200
+    borderBottomRightRadius: 200,
   },
   infoWrapper: {
     flex: 1,
   },
   info: {
-    backgroundColor: 'pink',
+    backgroundColor: "pink",
     paddingVertical: 16,
     paddingHorizontal: 16,
     borderTopLeftRadius: 16,
     borderBottomLeftRadius: 16,
     zIndex: 10,
-    
   },
   guide: {
-    backgroundColor: 'pink',
+    backgroundColor: "pink",
     flex: 1,
     paddingVertical: 16,
     paddingHorizontal: 16,
     borderTopRightRadius: 16,
     borderBottomRightRadius: 16,
-    borderLeftColor: 'gray',
+    borderLeftColor: "gray",
     borderLeftWidth: 2,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
   },
   content: {
     flexDirection: "row",
@@ -104,15 +105,14 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 20,
     fontWeight: "400",
-    color: '#fff',
-    textTransform: 'capitalize',
-   
+    color: "#fff",
+    textTransform: "capitalize",
   },
   description: {
     fontSize: 14,
     fontWeight: "bold",
-    textTransform: 'uppercase',
-    color: '#fff',
+    textTransform: "uppercase",
+    color: "#fff",
     opacity: 0.6,
   },
 });

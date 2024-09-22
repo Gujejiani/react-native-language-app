@@ -138,7 +138,7 @@ export const modulesMock: IModule[] = [
   {
     id: 2,
     name: { en: "Primitive Types", es: "Módulo 2" },
-    description: {       en: "Section 1, UNIT 2", es: "TypeScript Avanzado" },
+    description: { en: "Section 1, UNIT 2", es: "TypeScript Avanzado" },
     imageUrl: "https://example.com/images/module2.png",
     icon: "https://example.com/icons/module2.png",
     moduleColor: "lightgreen",
@@ -269,7 +269,7 @@ export const modulesMock: IModule[] = [
   {
     id: 3,
     name: { en: "Generic Types", es: "Módulo 3" },
-    description: {  en: "Section 1, UNIT 3", es: "TypeScript Avanzado" },
+    description: { en: "Section 1, UNIT 3", es: "TypeScript Avanzado" },
     imageUrl: "https://example.com/images/module2.png",
     icon: "https://example.com/icons/module2.png",
     moduleColor: "pink",
@@ -397,5 +397,4 @@ export const modulesMock: IModule[] = [
     ],
     count: 1,
   },
-  
 ];

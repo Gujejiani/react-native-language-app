@@ -18,26 +18,18 @@ export const LanguageModule: React.FC<LanguageModuleProps> = ({
   module,
   scrollViewRef,
   scrollY,
-  updateModulePosition
+  updateModulePosition,
 }) => {
-
   const startLessonHandler = () => {
     console.log("start lesson from module");
   };
 
-
-  
   const handleLayout = (event: LayoutChangeEvent) => {
     const { y } = event.nativeEvent.layout;
 
-  
-    console.log('module id', module.id, 'positionY', y);
-      updateModulePosition(module.id, y);
-
-  
+    console.log("module id", module.id, "positionY", y);
+    updateModulePosition(module.id, y);
   };
-
-
 
   const moduleLessons = module.lessons.map((lesson, index) => {
     const offset = index * 20; // Increase left or right offset progressively
@@ -68,7 +60,7 @@ export const LanguageModule: React.FC<LanguageModuleProps> = ({
 
   return (
     <ThemedView style={styles.moduleContainer} onLayout={handleLayout}>
-      <ModuleTitle  title={module.name.en} />
+      <ModuleTitle title={module.name.en} />
       {moduleLessons}
     </ThemedView>
   );
