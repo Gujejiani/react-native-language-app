@@ -10,7 +10,7 @@ import { LanguageModule } from "@/components/home/language-module/Language-modul
 import { IModule, LanguageBackground } from "@/models";
 import Animated from "react-native-reanimated";
 
-import { useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import SectionHeader from "@/components/home/language-module/components/section-header/SectionHeader";
 export default function HomeScreen() {
   const modules: IModule[] = modulesMock;
@@ -21,26 +21,55 @@ export default function HomeScreen() {
   const [visibleModule, setVisibleModule] = useState<IModule>(modules[0]);
 
 
+  // module id => positionY
+  const [modulePositionsY, setModulePositionsY] = useState<Record<number, number>>([]);
+
+
 
   const setVisibleModuleHandler = (moduleID: number) => {
+
+    if(moduleID === visibleModule.id){
+      return
+    }
       
     const module = modules.find((module) => module.id === moduleID);
+
+
     if (module) {
       setVisibleModule(module);
     }
   }
 
+  useEffect(()=>{
+    determineVisibleModule(currentScrollY);
+  }, [currentScrollY])
+
+   
+
+    const determineVisibleModule = useCallback((scrollY: number) => {
+      const moduleIDs = Object.keys(modulePositionsY).map((id)=>parseInt(id));
+
+      let closestModalId = moduleIDs[0]
+       moduleIDs.forEach(id=>{
+           if( modulePositionsY[id] < scrollY ){
+            closestModalId = id;
+           }
+      })
+      setVisibleModuleHandler(closestModalId);
+    }, [modulePositionsY])
+
+  const setModulePositionsYHandler = useCallback((moduleID: number, positionY: number) => {
+    setModulePositionsY((prevState) => {
+      return {
+        ...prevState,
+        [moduleID]: positionY,
+      };
+    })
+  }, [] )
+ 
 
   return (
-    // <ParallaxScrollView
-    //   headerBackgroundColor={{ light: "#A1CEDC", dark: "#1D3D47" }}
-    //   headerImage={
-    //     <Image
-    //       source={require("@/assets/images/partial-react-logo.png")}
-    //       style={styles.reactLogo}
-    //     />
-    //   }
-    // >
+   
     <ThemedView>
       <HomeScreenHeader></HomeScreenHeader>
       
@@ -55,7 +84,7 @@ export default function HomeScreen() {
           {modules.map((module) => {
             return (
               <LanguageModule
-                changeVisibleModule={setVisibleModuleHandler}
+              updateModulePosition={setModulePositionsYHandler}
                 scrollY={currentScrollY}
                 scrollViewRef={scrollRef}
                 key={module.id}

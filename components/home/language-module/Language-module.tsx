@@ -11,35 +11,33 @@ interface LanguageModuleProps {
   module: IModule;
   scrollViewRef: React.RefObject<Animated.ScrollView>;
   scrollY: number; // Receive shared scroll value
-  changeVisibleModule: (id: number) => void;
+  updateModulePosition: (id: number, positionY: number) => void;
 }
 
 export const LanguageModule: React.FC<LanguageModuleProps> = ({
   module,
   scrollViewRef,
   scrollY,
-  changeVisibleModule
+  updateModulePosition
 }) => {
-  const [containerPositionY, setContainerPositionY] = useState(0);
 
   const startLessonHandler = () => {
     console.log("start lesson from module");
   };
 
+
   
   const handleLayout = (event: LayoutChangeEvent) => {
     const { y } = event.nativeEvent.layout;
-    setContainerPositionY(y);
 
+  
+    console.log('module id', module.id, 'positionY', y);
+      updateModulePosition(module.id, y);
+
+  
   };
 
-  useEffect(()=>{
-    // Change section header color when scrollY is greater than containerPositionY
-    if(scrollY > containerPositionY){
-      changeVisibleModule(module.id);
-    }
 
-  }, [scrollY])
 
   const moduleLessons = module.lessons.map((lesson, index) => {
     const offset = index * 20; // Increase left or right offset progressively
