@@ -4,7 +4,6 @@ import { HelloWave } from "@/components/HelloWave";
 import ParallaxScrollView from "@/components/ParallaxScrollView";
 import { ThemedText } from "@/components/ThemedText";
 import { ThemedView } from "@/components/ThemedView";
-import HomeScreenHeader from "@/components/home/header/Header";
 import { modulesMock } from "@/mock/language.mock";
 import { LanguageModule } from "@/components/home/language-module/Language-module";
 import { IModule, LanguageBackground } from "@/models";
@@ -12,6 +11,7 @@ import Animated from "react-native-reanimated";
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import SectionHeader from "@/components/home/language-module/components/section-header/SectionHeader";
+import HomeScreenHeader from "@/components/home/header/header";
 export default function HomeScreen() {
   const modules: IModule[] = modulesMock;
   const scrollRef = useRef<Animated.ScrollView>(null);
