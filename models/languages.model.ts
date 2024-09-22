@@ -34,6 +34,7 @@ export interface IModule {
   icon?: string;
   lessons: ILesson[];
   count: number;
+  moduleColor:  LanguageBackground;
 }
 
 export interface ILesson {
@@ -83,3 +84,7 @@ interface LocalizedString {
   es?: string;
   // add other languages as needed
 }
+
+
+
+export type LanguageBackground = "pink" | "lightblue" | "lightgreen" | "lightcoral";

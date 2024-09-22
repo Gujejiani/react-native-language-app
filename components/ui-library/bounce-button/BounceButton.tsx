@@ -70,18 +70,19 @@ const BounceButton: React.FC<BounceButtonProps> =({onPress, children, style, pre
 
 const styles = StyleSheet.create({
     bounceEffect: {
-        top: 8,
+        top: 4,
       },
 
       pressEffect: {
-        backgroundColor: "rgba(0,0,0,0.1)",
+        backgroundColor: 'gray',
         width: "100%",
         height: 20,
-        borderRadius: 8,
+        borderRadius: 100,
         position: 'absolute',
-        bottom: -4,
+        bottom: -3,
         zIndex: 1,
-        left: 0
+        left: 0,
+        
       },
 
       button: {

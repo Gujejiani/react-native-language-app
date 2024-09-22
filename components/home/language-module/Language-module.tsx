@@ -1,7 +1,7 @@
 import { ThemedView } from "@/components/ThemedView";
 import { IModule } from "@/models/";
-import React, { useState, useRef, useEffect } from "react";
-import { StyleSheet, View, findNodeHandle } from "react-native";
+import React, { useEffect, useState } from "react";
+import { StyleSheet, View, LayoutChangeEvent } from "react-native";
 import ModuleTitle from "./components/module-title/ModuleTitle";
 import Lesson from "./components/lesson/Lesson";
 import { ScrollView } from "react-native-gesture-handler";
@@ -11,20 +11,38 @@ interface LanguageModuleProps {
   module: IModule;
   scrollViewRef: React.RefObject<Animated.ScrollView>;
   scrollY: number; // Receive shared scroll value
+  changeVisibleModule: (id: number) => void;
 }
 
 export const LanguageModule: React.FC<LanguageModuleProps> = ({
   module,
   scrollViewRef,
   scrollY,
+  changeVisibleModule
 }) => {
+  const [containerPositionY, setContainerPositionY] = useState(0);
+
   const startLessonHandler = () => {
     console.log("start lesson from module");
   };
 
+  
+  const handleLayout = (event: LayoutChangeEvent) => {
+    const { y } = event.nativeEvent.layout;
+    setContainerPositionY(y);
+
+  };
+
+  useEffect(()=>{
+    // Change section header color when scrollY is greater than containerPositionY
+    if(scrollY > containerPositionY){
+      changeVisibleModule(module.id);
+    }
+
+  }, [scrollY])
+
   const moduleLessons = module.lessons.map((lesson, index) => {
     const offset = index * 20; // Increase left or right offset progressively
-
     const isLeft = index % 2 !== 0;
 
     return (
@@ -51,9 +69,8 @@ export const LanguageModule: React.FC<LanguageModuleProps> = ({
   });
 
   return (
-    <ThemedView style={styles.moduleContainer}>
-      <ModuleTitle title={module.name.en} />
-
+    <ThemedView style={styles.moduleContainer} onLayout={handleLayout}>
+      <ModuleTitle  title={module.name.en} />
       {moduleLessons}
     </ThemedView>
   );
@@ -65,37 +82,7 @@ const styles = StyleSheet.create({
     width: "100%",
   },
   lesson: {
-    // position: "absolute",
     marginTop: 70,
     alignItems: "center",
-  },
-  module: {
-    position: "relative",
-    marginTop: 50,
-  },
-  titleContainer: {
-    display: "flex",
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
-    width: "100%",
-  },
-  moduleTitle: {
-    textAlign: "center",
-    paddingHorizontal: 10,
-    color: "gray",
-    fontWeight: "bold",
-  },
-  line: {
-    flex: 1,
-    height: 1,
-    backgroundColor: "gray",
-    marginHorizontal: 10,
-  },
-  left: {
-    alignSelf: "flex-start", // Aligns the lesson to the left
-  },
-  right: {
-    alignSelf: "flex-end", // Aligns the lesson to the right
   },
 });

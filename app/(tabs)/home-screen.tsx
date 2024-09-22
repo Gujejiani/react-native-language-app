@@ -7,7 +7,7 @@ import { ThemedView } from "@/components/ThemedView";
 import HomeScreenHeader from "@/components/home/header/Header";
 import { modulesMock } from "@/mock/language.mock";
 import { LanguageModule } from "@/components/home/language-module/Language-module";
-import { IModule } from "@/models";
+import { IModule, LanguageBackground } from "@/models";
 import Animated from "react-native-reanimated";
 
 import { useRef, useState } from "react";
@@ -17,6 +17,19 @@ export default function HomeScreen() {
   const scrollRef = useRef<Animated.ScrollView>(null);
 
   const [currentScrollY, setCurrentScrollY] = useState(0);
+
+  const [visibleModule, setVisibleModule] = useState<IModule>(modules[0]);
+
+
+
+  const setVisibleModuleHandler = (moduleID: number) => {
+      
+    const module = modules.find((module) => module.id === moduleID);
+    if (module) {
+      setVisibleModule(module);
+    }
+  }
+
 
   return (
     // <ParallaxScrollView
@@ -31,7 +44,7 @@ export default function HomeScreen() {
     <ThemedView>
       <HomeScreenHeader></HomeScreenHeader>
       
-      <SectionHeader   title="Fake Title " description="fake desc"  ></SectionHeader>
+      <SectionHeader  sectionBackgroundColor={visibleModule.moduleColor} title={visibleModule.name.en} description={visibleModule.description.en}  ></SectionHeader>
       <Animated.ScrollView
         onScroll={(event) => {
           setCurrentScrollY(event.nativeEvent.contentOffset.y);
@@ -42,13 +55,14 @@ export default function HomeScreen() {
           {modules.map((module) => {
             return (
               <LanguageModule
+                changeVisibleModule={setVisibleModuleHandler}
                 scrollY={currentScrollY}
                 scrollViewRef={scrollRef}
                 key={module.id}
                 module={module}
               ></LanguageModule>
             );
-          })}
+          })} 
         </ThemedView>
       </Animated.ScrollView>
     </ThemedView>
