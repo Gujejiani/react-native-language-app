@@ -11,7 +11,7 @@ import Animated from "react-native-reanimated";
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import SectionHeader from "@/components/home/language-module/components/section-header/SectionHeader";
-import HomeScreenHeader from "@/components/home/header/header";
+import HomeScreenHeader from "@/components/home/header/Header";
 export default function HomeScreen() {
   const modules: IModule[] = modulesMock;
   const scrollRef = useRef<Animated.ScrollView>(null);
