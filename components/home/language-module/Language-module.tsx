@@ -6,7 +6,7 @@ import ModuleTitle from "./components/module-title/ModuleTitle";
 import Lesson from "./components/lesson/Lesson";
 import { ScrollView } from "react-native-gesture-handler";
 import Animated from "react-native-reanimated";
-import { router } from 'expo-router';
+import { router } from "expo-router";
 
 interface LanguageModuleProps {
   module: IModule;
@@ -23,7 +23,7 @@ export const LanguageModule: React.FC<LanguageModuleProps> = ({
 }) => {
   const startLessonHandler = () => {
     console.log("start lesson from module");
-    router.navigate('/lesson-screen')
+    router.navigate("/lesson-screen");
   };
 
   const handleLayout = (event: LayoutChangeEvent) => {
