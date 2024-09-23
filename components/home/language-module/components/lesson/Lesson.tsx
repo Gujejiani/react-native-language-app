@@ -1,7 +1,7 @@
 import { ThemedView } from "@/components/ThemedView";
 import InfoModal from "@/components/ui-library/Info-modal/InfoModal";
 import LessonButton from "@/components/ui-library/Lesson-Button/LessonButton";
-import { ILesson } from "@/models";
+import { ILesson, IModule } from "@/models";
 import { useRef, useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import Animated from "react-native-reanimated";
@@ -13,6 +13,7 @@ interface LessonProps {
   description: string;
   scrollViewRef: React.RefObject<Animated.ScrollView>;
   scrollY: number; // Receive shared scroll value
+  module: IModule;
 }
 
 const Lesson: React.FC<LessonProps> = ({
@@ -22,6 +23,7 @@ const Lesson: React.FC<LessonProps> = ({
   description,
   scrollViewRef,
   scrollY,
+  module
 }) => {
   const [buttonPosition, setButtonPosition] = useState({ x: 0, y: 0 });
   const [showModal, setShowModal] = useState(false);
@@ -52,7 +54,9 @@ const Lesson: React.FC<LessonProps> = ({
           progress={0.75}
           label={lesson.status === "unlocked" ? "Start" : ""}
           disabled={lesson.status === "locked"}
+          moduleBackground={module.moduleColor}
           onPress={buttonPressHandler}
+          
         />
       </View>
       <View style={styles.modal}>

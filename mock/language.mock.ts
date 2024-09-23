@@ -1,4 +1,4 @@
-import { IModule } from "@/models";
+import { IModule, LanguageHeaderBackgroundEnum } from "@/models";
 
 export const modulesMock: IModule[] = [
   {
@@ -10,7 +10,7 @@ export const modulesMock: IModule[] = [
     },
     imageUrl: "https://example.com/images/module1.png",
     icon: "https://example.com/icons/module1.png",
-    moduleColor: "lightblue",
+    moduleColor: LanguageHeaderBackgroundEnum.LightGreen,
     lessons: [
       {
         status: "unlocked",
@@ -141,7 +141,7 @@ export const modulesMock: IModule[] = [
     description: { en: "Section 1, UNIT 2", es: "TypeScript Avanzado" },
     imageUrl: "https://example.com/images/module2.png",
     icon: "https://example.com/icons/module2.png",
-    moduleColor: "lightgreen",
+    moduleColor: LanguageHeaderBackgroundEnum.Purple,
     lessons: [
       {
         id: 1,
@@ -272,7 +272,7 @@ export const modulesMock: IModule[] = [
     description: { en: "Section 1, UNIT 3", es: "TypeScript Avanzado" },
     imageUrl: "https://example.com/images/module2.png",
     icon: "https://example.com/icons/module2.png",
-    moduleColor: "pink",
+    moduleColor: LanguageHeaderBackgroundEnum.Pink,
     lessons: [
       {
         id: 1,

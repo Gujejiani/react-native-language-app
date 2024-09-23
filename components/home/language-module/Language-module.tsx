@@ -50,6 +50,7 @@ export const LanguageModule: React.FC<LanguageModuleProps> = ({
           scrollViewRef={scrollViewRef}
           scrollY={scrollY}
           lesson={lesson}
+          module={module}
           title={lesson.name.en}
           description={lesson.description.en}
           startLesson={startLessonHandler}

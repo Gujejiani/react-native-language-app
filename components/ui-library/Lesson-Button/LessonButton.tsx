@@ -19,7 +19,8 @@ const LessonButton: React.FC<{
   label?: string;
   onPress?: () => void;
   disabled?: boolean;
-}> = ({ progress = 0.75, iconName = "star", label, onPress, disabled }) => {
+  moduleBackground: string;
+}> = ({ progress = 0.75, iconName = "star", label, onPress, disabled, moduleBackground }) => {
   const {
     animatedProgress,
     positionY,
@@ -85,7 +86,7 @@ const LessonButton: React.FC<{
             r={(SIZE - STROKE_WIDTH) / 2}
             strokeWidth={STROKE_WIDTH}
           />
-          <AnimatedCircle
+{      !disabled?    <AnimatedCircle
             stroke={disabled ? "#b3c7f7" : "#3b82f6"}
             fill="none"
             cx={SIZE / 2}
@@ -95,7 +96,7 @@ const LessonButton: React.FC<{
             strokeDasharray={2 * Math.PI * ((SIZE - STROKE_WIDTH) / 2)}
             strokeDashoffset={strokeDashoffset}
             strokeLinecap="round"
-          />
+          />: ''}
         </Svg>
         <Animated.View
           style={[
@@ -106,8 +107,8 @@ const LessonButton: React.FC<{
           ]}
         >
           <LinearGradient
-            colors={disabled ? ["#e0bfd8", "#d9a7b1"] : ["#ff7eeb", "#ff61a6"]} // Pink gradient colors
-            style={styles.innerCircle}
+            colors={disabled ? [moduleBackground, moduleBackground] : [moduleBackground,moduleBackground]} // Pink gradient colors
+            style={{...styles.innerCircle, opacity: disabled ? 0.5 : 1}}
           >
             <View style={styles.iconContainer}>
               <FontAwesome6 name={iconName} size={24} color="#ffffff" />
