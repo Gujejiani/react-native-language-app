@@ -1,0 +1,14 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+# Run Prettier to format the staged files
+npm run format
+
+# Check if there are any changes after running Prettier
+if [ -n "$(git status --porcelain)" ]; then
+  # Stage the changes
+  git add .
+
+  # Amend the previous commit without changing the commit message
+  git commit --amend --no-edit
+fi
