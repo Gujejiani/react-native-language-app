@@ -8,7 +8,7 @@ import { modulesMock } from "@/mock/language.mock";
 import { LanguageModule } from "@/components/home/language-module/Language-module";
 import { IModule, LanguageBackground } from "@/models";
 import Animated from "react-native-reanimated";
-
+import * as Haptics from "expo-haptics";
 import { useCallback, useEffect, useRef, useState } from "react";
 import SectionHeader from "@/components/home/language-module/components/section-header/SectionHeader";
 import HomeScreenHeader from "@/components/home/header/Header";
@@ -34,6 +34,8 @@ export default function HomeScreen() {
 
     if (module) {
       setVisibleModule(module);
+      Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
+     
     }
   };
 
@@ -41,7 +43,7 @@ export default function HomeScreen() {
     determineVisibleModule(currentScrollY);
   }, [currentScrollY]);
 
-  const determineVisibleModule = useCallback(
+  const determineVisibleModule = 
     (scrollY: number) => {
       const moduleIDs = Object.keys(modulePositionsY).map((id) => parseInt(id));
 
@@ -51,10 +53,9 @@ export default function HomeScreen() {
           closestModalId = id;
         }
       });
+     
       setVisibleModuleHandler(closestModalId);
-    },
-    [modulePositionsY],
-  );
+    }
 
   const setModulePositionsYHandler = useCallback(
     (moduleID: number, positionY: number) => {
