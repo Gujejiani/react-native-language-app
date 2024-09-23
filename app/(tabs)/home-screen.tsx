@@ -35,7 +35,6 @@ export default function HomeScreen() {
     if (module) {
       setVisibleModule(module);
       Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
-     
     }
   };
 
@@ -43,19 +42,18 @@ export default function HomeScreen() {
     determineVisibleModule(currentScrollY);
   }, [currentScrollY]);
 
-  const determineVisibleModule = 
-    (scrollY: number) => {
-      const moduleIDs = Object.keys(modulePositionsY).map((id) => parseInt(id));
+  const determineVisibleModule = (scrollY: number) => {
+    const moduleIDs = Object.keys(modulePositionsY).map((id) => parseInt(id));
 
-      let closestModalId = moduleIDs[0];
-      moduleIDs.forEach((id) => {
-        if (modulePositionsY[id] < scrollY) {
-          closestModalId = id;
-        }
-      });
-     
-      setVisibleModuleHandler(closestModalId);
-    }
+    let closestModalId = moduleIDs[0];
+    moduleIDs.forEach((id) => {
+      if (modulePositionsY[id] < scrollY) {
+        closestModalId = id;
+      }
+    });
+
+    setVisibleModuleHandler(closestModalId);
+  };
 
   const setModulePositionsYHandler = useCallback(
     (moduleID: number, positionY: number) => {
