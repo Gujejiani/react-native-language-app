@@ -1,8 +1,4 @@
-import { Image, StyleSheet, Platform } from "react-native";
-
-import { HelloWave } from "@/components/HelloWave";
-import ParallaxScrollView from "@/components/ParallaxScrollView";
-import { ThemedText } from "@/components/ThemedText";
+import {  StyleSheet } from "react-native";
 import { ThemedView } from "@/components/ThemedView";
 import { modulesMock } from "@/mock/language.mock";
 import { LanguageModule } from "@/components/home/language-module/Language-module";
