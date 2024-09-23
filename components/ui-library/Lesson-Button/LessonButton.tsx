@@ -20,7 +20,14 @@ const LessonButton: React.FC<{
   onPress?: () => void;
   disabled?: boolean;
   moduleBackground: string;
-}> = ({ progress = 0.75, iconName = "star", label, onPress, disabled, moduleBackground }) => {
+}> = ({
+  progress = 0.75,
+  iconName = "star",
+  label,
+  onPress,
+  disabled,
+  moduleBackground,
+}) => {
   const {
     animatedProgress,
     positionY,
@@ -86,17 +93,21 @@ const LessonButton: React.FC<{
             r={(SIZE - STROKE_WIDTH) / 2}
             strokeWidth={STROKE_WIDTH}
           />
-{      !disabled?    <AnimatedCircle
-            stroke={disabled ? "#b3c7f7" : "#3b82f6"}
-            fill="none"
-            cx={SIZE / 2}
-            cy={SIZE / 2}
-            r={(SIZE - STROKE_WIDTH) / 2}
-            strokeWidth={STROKE_WIDTH}
-            strokeDasharray={2 * Math.PI * ((SIZE - STROKE_WIDTH) / 2)}
-            strokeDashoffset={strokeDashoffset}
-            strokeLinecap="round"
-          />: ''}
+          {!disabled ? (
+            <AnimatedCircle
+              stroke={disabled ? "#b3c7f7" : "#3b82f6"}
+              fill="none"
+              cx={SIZE / 2}
+              cy={SIZE / 2}
+              r={(SIZE - STROKE_WIDTH) / 2}
+              strokeWidth={STROKE_WIDTH}
+              strokeDasharray={2 * Math.PI * ((SIZE - STROKE_WIDTH) / 2)}
+              strokeDashoffset={strokeDashoffset}
+              strokeLinecap="round"
+            />
+          ) : (
+            ""
+          )}
         </Svg>
         <Animated.View
           style={[
@@ -107,8 +118,12 @@ const LessonButton: React.FC<{
           ]}
         >
           <LinearGradient
-            colors={disabled ? [moduleBackground, moduleBackground] : [moduleBackground,moduleBackground]} // Pink gradient colors
-            style={{...styles.innerCircle, opacity: disabled ? 0.5 : 1}}
+            colors={
+              disabled
+                ? [moduleBackground, moduleBackground]
+                : [moduleBackground, moduleBackground]
+            } // Pink gradient colors
+            style={{ ...styles.innerCircle, opacity: disabled ? 0.5 : 1 }}
           >
             <View style={styles.iconContainer}>
               <FontAwesome6 name={iconName} size={24} color="#ffffff" />

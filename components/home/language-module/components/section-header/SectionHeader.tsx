@@ -77,7 +77,6 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   info: {
-    
     paddingVertical: 16,
     paddingHorizontal: 16,
     borderTopLeftRadius: 16,
@@ -85,7 +84,6 @@ const styles = StyleSheet.create({
     zIndex: 10,
   },
   guide: {
-
     flex: 1,
     paddingVertical: 16,
     paddingHorizontal: 16,

@@ -23,7 +23,7 @@ const Lesson: React.FC<LessonProps> = ({
   description,
   scrollViewRef,
   scrollY,
-  module
+  module,
 }) => {
   const [buttonPosition, setButtonPosition] = useState({ x: 0, y: 0 });
   const [showModal, setShowModal] = useState(false);
@@ -56,7 +56,6 @@ const Lesson: React.FC<LessonProps> = ({
           disabled={lesson.status === "locked"}
           moduleBackground={module.moduleColor}
           onPress={buttonPressHandler}
-          
         />
       </View>
       <View style={styles.modal}>
