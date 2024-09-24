@@ -1,13 +1,14 @@
 import { StyleSheet } from "react-native";
 import { ThemedView } from "@/components/ThemedView";
-import { modulesMock } from "@/mock/language.mock";
-import { LanguageModule } from "@/components/home/language-module/Language-module";
 import { IModule, LanguageBackground } from "@/models";
 import Animated from "react-native-reanimated";
 import * as Haptics from "expo-haptics";
 import { useCallback, useEffect, useRef, useState } from "react";
-import SectionHeader from "@/components/home/language-module/components/section-header/SectionHeader";
-import HomeScreenHeader from "@/components/home/header/Header";
+import { LanguageModule } from "@/pages/home/language-module/Language-module";
+import HomeScreenHeader from "@/pages/home/header/Header";
+import SectionHeader from "@/pages/home/language-module/components/section-header/SectionHeader";
+import modulesMock from "@/mock/language.mock";
+
 export default function HomeScreen() {
   const modules: IModule[] = modulesMock;
   const scrollRef = useRef<Animated.ScrollView>(null);

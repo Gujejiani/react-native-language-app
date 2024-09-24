@@ -21,9 +21,12 @@ export const LanguageModule: React.FC<LanguageModuleProps> = ({
   scrollY,
   updateModulePosition,
 }) => {
-  const startLessonHandler = () => {
+  const startLessonHandler = (lessonID: number) => {
     console.log("start lesson from module");
-    router.navigate("/lesson-screen");
+    router.navigate({
+      pathname: "/lesson-screen",
+      params: { lessonID: lessonID },
+    });
   };
 
   const handleLayout = (event: LayoutChangeEvent) => {
@@ -55,7 +58,7 @@ export const LanguageModule: React.FC<LanguageModuleProps> = ({
           module={module}
           title={lesson.name.en}
           description={lesson.description.en}
-          startLesson={startLessonHandler}
+          startLesson={() => startLessonHandler(lesson.id)}
         />
       </ThemedView>
     );

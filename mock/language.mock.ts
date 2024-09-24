@@ -1,400 +1,485 @@
 import { IModule, LanguageHeaderBackgroundEnum } from "@/models";
 
-export const modulesMock: IModule[] = [
+// Mock Data for ILanguages
+const modulesMock: IModule[] = [
   {
     id: 1,
-    name: { en: "TypeScript Basics", es: "Módulo 1" },
+    name: { en: "Basic Syntax", es: "Sintaxis Básica" },
     description: {
-      en: "Section 1, UNIT 1",
-      es: "Introducción a TypeScript",
+      en: "Section 1, lesson 1",
+      es: "Aprende la sintaxis básica y características de TypeScript.",
     },
-    imageUrl: "https://example.com/images/module1.png",
-    icon: "https://example.com/icons/module1.png",
-    moduleColor: LanguageHeaderBackgroundEnum.LightGreen,
-    lessons: [
-      {
-        status: "unlocked",
-        id: 1,
-        name: { en: "TypeScript Fundamentals", es: "Lección 1" },
-        description: {
-          en: "Getting started with TypeScript",
-          es: "Empezando con TypeScript",
-        },
-        imageUrl: "https://example.com/images/lesson1.png",
-        icon: "https://example.com/icons/lesson1.png",
-        content: "This is a text content for the lesson.",
-        challenges: [
-          {
-            id: 1,
-            name: "Challenge 1",
-            description: "This is a task challenge.",
-            type: "task",
-            content: "Complete the TypeScript setup.",
-          },
-          {
-            id: 2,
-            name: "Challenge 2",
-            description: "This is an exam challenge.",
-            type: "exam",
-            content: "Answer the following questions.",
-            passingScore: 70,
-            questions: [
-              {
-                id: 1,
-                questionText: "What is TypeScript?",
-                options: [
-                  {
-                    id: 1,
-                    optionText: "A superset of JavaScript",
-                    isCorrect: true,
-                  },
-                  { id: 2, optionText: "A database", isCorrect: false },
-                  { id: 3, optionText: "A CSS framework", isCorrect: false },
-                ],
-                correctAnswer: "A superset of JavaScript",
-              },
-              {
-                id: 2,
-                questionText: "Which company developed TypeScript?",
-                options: [
-                  { id: 1, optionText: "Google", isCorrect: false },
-                  { id: 2, optionText: "Microsoft", isCorrect: true },
-                  { id: 3, optionText: "Facebook", isCorrect: false },
-                ],
-                correctAnswer: "Microsoft",
-              },
-            ],
-          },
-        ],
-      },
-      {
-        id: 2,
-        status: "locked",
-        name: { en: "Basic Types", es: "Lección 2" },
-        description: {
-          en: "TypeScript basic types",
-          es: "Tipos básicos en TypeScript",
-        },
-        imageUrl: "https://example.com/images/lesson2.png",
-        icon: "https://example.com/icons/lesson2.png",
-        content: {
-          type: "video",
-          url: "https://example.com/videos/lesson2.mp4",
-        },
-        challenges: [],
-      },
-
-      {
-        id: 3,
-        status: "locked",
-        name: { en: "Primitive types", es: "Lección 2" },
-        description: {
-          en: "Do you know the primitive types?",
-          es: "Tipos básicos en TypeScript",
-        },
-        imageUrl: "https://example.com/images/lesson2.png",
-        icon: "https://example.com/icons/lesson2.png",
-        content: {
-          type: "video",
-          url: "https://example.com/videos/lesson2.mp4",
-        },
-        challenges: [],
-      },
-      {
-        id: 4,
-        status: "locked",
-        name: { en: "OOP", es: "Lección 2" },
-        description: {
-          en: "Object Oriented Programming",
-          es: "Tipos básicos en TypeScript",
-        },
-        imageUrl: "https://example.com/images/lesson2.png",
-        icon: "https://example.com/icons/lesson2.png",
-        content: {
-          type: "video",
-          url: "https://example.com/videos/lesson2.mp4",
-        },
-        challenges: [],
-      },
-      {
-        id: 5,
-        status: "locked",
-        name: { en: "Single Responsability", es: "Lección 2" },
-        description: {
-          en: "What Is Single Responsability Principle",
-          es: "Tipos básicos en TypeScript",
-        },
-        imageUrl: "https://example.com/images/lesson2.png",
-        icon: "https://example.com/icons/lesson2.png",
-        content: {
-          type: "video",
-          url: "https://example.com/videos/lesson2.mp4",
-        },
-        challenges: [],
-      },
-    ],
-    count: 2,
-  },
-  {
-    id: 2,
-    name: { en: "Primitive Types", es: "Módulo 2" },
-    description: { en: "Section 1, UNIT 2", es: "TypeScript Avanzado" },
-    imageUrl: "https://example.com/images/module2.png",
-    icon: "https://example.com/icons/module2.png",
-    moduleColor: LanguageHeaderBackgroundEnum.Purple,
-    lessons: [
-      {
-        id: 1,
-        name: { en: "TypeScript Fundamentals", es: "Lección 1" },
-        description: {
-          en: "Getting started with TypeScript",
-          es: "Empezando con TypeScript",
-        },
-        status: "unlocked",
-        imageUrl: "https://example.com/images/lesson1.png",
-        icon: "https://example.com/icons/lesson1.png",
-        content: "This is a text content for the lesson.",
-        challenges: [
-          {
-            id: 1,
-            name: "Challenge 1",
-            description: "This is a task challenge.",
-            type: "task",
-            content: "Complete the TypeScript setup.",
-          },
-          {
-            id: 2,
-            name: "Challenge 2",
-            description: "This is an exam challenge.",
-            type: "exam",
-            content: "Answer the following questions.",
-            passingScore: 70,
-            questions: [
-              {
-                id: 1,
-                questionText: "What is TypeScript?",
-                options: [
-                  {
-                    id: 1,
-                    optionText: "A superset of JavaScript",
-                    isCorrect: true,
-                  },
-                  { id: 2, optionText: "A database", isCorrect: false },
-                  { id: 3, optionText: "A CSS framework", isCorrect: false },
-                ],
-                correctAnswer: "A superset of JavaScript",
-              },
-              {
-                id: 2,
-                questionText: "Which company developed TypeScript?",
-                options: [
-                  { id: 1, optionText: "Google", isCorrect: false },
-                  { id: 2, optionText: "Microsoft", isCorrect: true },
-                  { id: 3, optionText: "Facebook", isCorrect: false },
-                ],
-                correctAnswer: "Microsoft",
-              },
-            ],
-          },
-        ],
-      },
-      {
-        id: 2,
-        name: { en: "Basic Types", es: "Lección 2" },
-        description: {
-          en: "TypeScript basic types",
-          es: "Tipos básicos en TypeScript",
-        },
-        imageUrl: "https://example.com/images/lesson2.png",
-        icon: "https://example.com/icons/lesson2.png",
-        content: {
-          type: "video",
-          url: "https://example.com/videos/lesson2.mp4",
-        },
-        challenges: [],
-        status: "locked",
-      },
-
-      {
-        id: 3,
-        name: { en: "Primitive types", es: "Lección 2" },
-        description: {
-          en: "Do you know the primitive types?",
-          es: "Tipos básicos en TypeScript",
-        },
-        imageUrl: "https://example.com/images/lesson2.png",
-        icon: "https://example.com/icons/lesson2.png",
-        content: {
-          type: "video",
-          url: "https://example.com/videos/lesson2.mp4",
-        },
-        challenges: [],
-        status: "locked",
-      },
-      {
-        id: 4,
-        name: { en: "OOP", es: "Lección 2" },
-        description: {
-          en: "Object Oriented Programming",
-          es: "Tipos básicos en TypeScript",
-        },
-        imageUrl: "https://example.com/images/lesson2.png",
-        icon: "https://example.com/icons/lesson2.png",
-        content: {
-          type: "video",
-          url: "https://example.com/videos/lesson2.mp4",
-        },
-        challenges: [],
-        status: "locked",
-      },
-      {
-        id: 5,
-        name: { en: "Single Responsability", es: "Lección 2" },
-        description: {
-          en: "What Is Single Responsability Principle",
-          es: "Tipos básicos en TypeScript",
-        },
-        imageUrl: "https://example.com/images/lesson2.png",
-        icon: "https://example.com/icons/lesson2.png",
-        content: {
-          type: "video",
-          url: "https://example.com/videos/lesson2.mp4",
-        },
-        challenges: [],
-        status: "locked",
-      },
-    ],
-    count: 1,
-  },
-  {
-    id: 3,
-    name: { en: "Generic Types", es: "Módulo 3" },
-    description: { en: "Section 1, UNIT 3", es: "TypeScript Avanzado" },
-    imageUrl: "https://example.com/images/module2.png",
-    icon: "https://example.com/icons/module2.png",
+    imageUrl: "https://example.com/module1.png",
+    icon: "syntax-icon",
+    count: 10,
     moduleColor: LanguageHeaderBackgroundEnum.Pink,
     lessons: [
       {
         id: 1,
-        name: { en: "Generic Fundamentals", es: "Lección 1" },
+        name: { en: "Getting Started", es: "Empezando" },
         description: {
-          en: "Getting started with TypeScript",
-          es: "Empezando con TypeScript",
+          en: "Introduction to TypeScript basics.",
+          es: "Introducción a los conceptos básicos de TypeScript.",
         },
-        status: "unlocked",
-        imageUrl: "https://example.com/images/lesson1.png",
-        icon: "https://example.com/icons/lesson1.png",
-        content: "This is a text content for the lesson.",
+        content:
+          "Learn about TypeScript's basic syntax and how to get started.",
         challenges: [
           {
             id: 1,
-            name: "Challenge 1",
-            description: "This is a task challenge.",
+            name: "Basic Question",
+            description: "Answer this basic TypeScript question.",
             type: "task",
-            content: "Complete the TypeScript setup.",
-          },
-          {
-            id: 2,
-            name: "Challenge 2",
-            description: "This is an exam challenge.",
-            type: "exam",
-            content: "Answer the following questions.",
-            passingScore: 70,
-            questions: [
+            content: "What is TypeScript?",
+            passingScore: 80,
+            question: "What is TypeScript?",
+            status: "unlocked",
+            options: [
               {
                 id: 1,
-                questionText: "What is TypeScript?",
-                options: [
-                  {
-                    id: 1,
-                    optionText: "A superset of JavaScript",
-                    isCorrect: true,
-                  },
-                  { id: 2, optionText: "A database", isCorrect: false },
-                  { id: 3, optionText: "A CSS framework", isCorrect: false },
-                ],
-                correctAnswer: "A superset of JavaScript",
+                optionText: "A superset of JavaScript",
+                isCorrect: true,
+              },
+              { id: 2, optionText: "A CSS framework", isCorrect: false },
+              { id: 3, optionText: "A database language", isCorrect: false },
+            ],
+          },
+        ],
+        status: "unlocked",
+      },
+      {
+        id: 2,
+        name: { en: "Getting Started", es: "Empezando" },
+        description: {
+          en: "Introduction to TypeScript basics.",
+          es: "Introducción a los conceptos básicos de TypeScript.",
+        },
+        content:
+          "Learn about TypeScript's basic syntax and how to get started.",
+        challenges: [
+          {
+            id: 1,
+            name: "Basic Question",
+            description: "Answer this basic TypeScript question.",
+            type: "task",
+            content: "What is TypeScript?",
+            passingScore: 80,
+            question: "What is TypeScript?",
+            status: "unlocked",
+            options: [
+              {
+                id: 1,
+                optionText: "A superset of JavaScript",
+                isCorrect: true,
+              },
+              { id: 2, optionText: "A CSS framework", isCorrect: false },
+              { id: 3, optionText: "A database language", isCorrect: false },
+            ],
+          },
+        ],
+        status: "unlocked",
+      },
+      {
+        id: 3,
+        name: { en: "Getting Started", es: "Empezando" },
+        description: {
+          en: "Introduction to TypeScript basics.",
+          es: "Introducción a los conceptos básicos de TypeScript.",
+        },
+        content:
+          "Learn about TypeScript's basic syntax and how to get started.",
+        challenges: [
+          {
+            id: 1,
+            name: "Basic Question",
+            description: "Answer this basic TypeScript question.",
+            type: "task",
+            content: "What is TypeScript?",
+            passingScore: 80,
+            question: "What is TypeScript?",
+            status: "unlocked",
+            options: [
+              {
+                id: 1,
+                optionText: "A superset of JavaScript",
+                isCorrect: true,
+              },
+              { id: 2, optionText: "A CSS framework", isCorrect: false },
+              { id: 3, optionText: "A database language", isCorrect: false },
+            ],
+          },
+        ],
+        status: "unlocked",
+      },
+      {
+        id: 4,
+        name: { en: "Getting Started", es: "Empezando" },
+        description: {
+          en: "Introduction to TypeScript basics.",
+          es: "Introducción a los conceptos básicos de TypeScript.",
+        },
+        content:
+          "Learn about TypeScript's basic syntax and how to get started.",
+        challenges: [
+          {
+            id: 1,
+            name: "Basic Question",
+            description: "Answer this basic TypeScript question.",
+            type: "task",
+            content: "What is TypeScript?",
+            passingScore: 80,
+            question: "What is TypeScript?",
+            status: "unlocked",
+            options: [
+              {
+                id: 1,
+                optionText: "A superset of JavaScript",
+                isCorrect: true,
+              },
+              { id: 2, optionText: "A CSS framework", isCorrect: false },
+              { id: 3, optionText: "A database language", isCorrect: false },
+            ],
+          },
+        ],
+        status: "unlocked",
+      },
+    ],
+  },
+  {
+    id: 2,
+    name: { en: "Data Types", es: "Tipos de Datos" },
+    description: {
+      en: "Section 1, lesson 2",
+      es: "Comprende el sistema de tipos de TypeScript y los tipos básicos.",
+    },
+    imageUrl: "https://example.com/module2.png",
+    icon: "datatype-icon",
+    count: 8,
+    moduleColor: LanguageHeaderBackgroundEnum.LightBlue,
+    lessons: [
+      {
+        id: 2,
+        name: { en: "Primitive Types", es: "Tipos Primitivos" },
+        description: {
+          en: "Learn about primitive types in TypeScript.",
+          es: "Aprende sobre los tipos primitivos en TypeScript.",
+        },
+        content: "Explore basic data types like string, number, and boolean.",
+        challenges: [
+          {
+            id: 2,
+            name: "Data Types Question",
+            description: "Test your knowledge of TypeScript data types.",
+            type: "task",
+            content: "Identify the correct TypeScript data type.",
+            passingScore: 80,
+            question: "What type does 'let count: number = 5;' represent?",
+            status: "unlocked",
+            options: [
+              { id: 1, optionText: "number", isCorrect: true },
+              { id: 2, optionText: "string", isCorrect: false },
+              { id: 3, optionText: "boolean", isCorrect: false },
+            ],
+          },
+        ],
+        status: "unlocked",
+      },
+      {
+        id: 3,
+        name: { en: "Primitive Types", es: "Tipos Primitivos" },
+        description: {
+          en: "Learn about primitive types in TypeScript.",
+          es: "Aprende sobre los tipos primitivos en TypeScript.",
+        },
+        content: "Explore basic data types like string, number, and boolean.",
+        challenges: [
+          {
+            id: 2,
+            name: "Data Types Question",
+            description: "Test your knowledge of TypeScript data types.",
+            type: "task",
+            content: "Identify the correct TypeScript data type.",
+            passingScore: 80,
+            question: "What type does 'let count: number = 5;' represent?",
+            status: "unlocked",
+            options: [
+              { id: 1, optionText: "number", isCorrect: true },
+              { id: 2, optionText: "string", isCorrect: false },
+              { id: 3, optionText: "boolean", isCorrect: false },
+            ],
+          },
+        ],
+        status: "unlocked",
+      },
+      {
+        id: 4,
+        name: { en: "Primitive Types", es: "Tipos Primitivos" },
+        description: {
+          en: "Learn about primitive types in TypeScript.",
+          es: "Aprende sobre los tipos primitivos en TypeScript.",
+        },
+        content: "Explore basic data types like string, number, and boolean.",
+        challenges: [
+          {
+            id: 2,
+            name: "Data Types Question",
+            description: "Test your knowledge of TypeScript data types.",
+            type: "task",
+            content: "Identify the correct TypeScript data type.",
+            passingScore: 80,
+            question: "What type does 'let count: number = 5;' represent?",
+            status: "unlocked",
+            options: [
+              { id: 1, optionText: "number", isCorrect: true },
+              { id: 2, optionText: "string", isCorrect: false },
+              { id: 3, optionText: "boolean", isCorrect: false },
+            ],
+          },
+        ],
+        status: "unlocked",
+      },
+      {
+        id: 5,
+        name: { en: "Primitive Types", es: "Tipos Primitivos" },
+        description: {
+          en: "Learn about primitive types in TypeScript.",
+          es: "Aprende sobre los tipos primitivos en TypeScript.",
+        },
+        content: "Explore basic data types like string, number, and boolean.",
+        challenges: [
+          {
+            id: 2,
+            name: "Data Types Question",
+            description: "Test your knowledge of TypeScript data types.",
+            type: "task",
+            content: "Identify the correct TypeScript data type.",
+            passingScore: 80,
+            question: "What type does 'let count: number = 5;' represent?",
+            status: "unlocked",
+            options: [
+              { id: 1, optionText: "number", isCorrect: true },
+              { id: 2, optionText: "string", isCorrect: false },
+              { id: 3, optionText: "boolean", isCorrect: false },
+            ],
+          },
+        ],
+        status: "unlocked",
+      },
+    ],
+  },
+  {
+    id: 3,
+    name: { en: "Functions and Interfaces", es: "Funciones e Interfaces" },
+    description: {
+      en: "Section 1, lesson 3",
+      es: "Profundiza en funciones e interfaces en TypeScript.",
+    },
+    imageUrl: "https://example.com/module3.png",
+    icon: "functions-icon",
+    count: 7,
+    moduleColor: LanguageHeaderBackgroundEnum.LightGreen,
+    lessons: [
+      {
+        id: 3,
+        name: { en: "Functions in TypeScript", es: "Funciones en TypeScript" },
+        description: {
+          en: "Learn how to define and use functions.",
+          es: "Aprende a definir y usar funciones.",
+        },
+        content:
+          "Understand how to work with functions in TypeScript, including typed parameters and return types.",
+        challenges: [
+          {
+            id: 3,
+            name: "Functions Challenge",
+            description: "Test your knowledge of functions in TypeScript.",
+            type: "exam",
+            content: "Solve these function-related problems.",
+            passingScore: 70,
+            question: "What is the correct way to define a function type?",
+            status: "unlocked",
+            options: [
+              {
+                id: 1,
+                optionText: "function add(a: number, b: number): number",
+                isCorrect: true,
               },
               {
                 id: 2,
-                questionText: "Which company developed TypeScript?",
-                options: [
-                  { id: 1, optionText: "Google", isCorrect: false },
-                  { id: 2, optionText: "Microsoft", isCorrect: true },
-                  { id: 3, optionText: "Facebook", isCorrect: false },
-                ],
-                correctAnswer: "Microsoft",
+                optionText: "add(a: string, b: string): void",
+                isCorrect: false,
+              },
+              {
+                id: 3,
+                optionText: "function add(a, b) -> int",
+                isCorrect: false,
               },
             ],
           },
         ],
+        status: "unlocked",
+      },
+      {
+        id: 10,
+        name: { en: "Functions in TypeScript", es: "Funciones en TypeScript" },
+        description: {
+          en: "Learn how to define and use functions.",
+          es: "Aprende a definir y usar funciones.",
+        },
+        content:
+          "Understand how to work with functions in TypeScript, including typed parameters and return types.",
+        challenges: [
+          {
+            id: 3,
+            name: "Functions Challenge",
+            description: "Test your knowledge of functions in TypeScript.",
+            type: "exam",
+            content: "Solve these function-related problems.",
+            passingScore: 70,
+            question: "What is the correct way to define a function type?",
+            status: "unlocked",
+            options: [
+              {
+                id: 1,
+                optionText: "function add(a: number, b: number): number",
+                isCorrect: true,
+              },
+              {
+                id: 2,
+                optionText: "add(a: string, b: string): void",
+                isCorrect: false,
+              },
+              {
+                id: 3,
+                optionText: "function add(a, b) -> int",
+                isCorrect: false,
+              },
+            ],
+          },
+        ],
+        status: "unlocked",
       },
       {
         id: 2,
-        name: { en: "Basic Types", es: "Lección 2" },
+        name: { en: "Functions in TypeScript", es: "Funciones en TypeScript" },
         description: {
-          en: "Section 1, UNIT 3",
-          es: "Tipos básicos en TypeScript",
+          en: "Learn how to define and use functions.",
+          es: "Aprende a definir y usar funciones.",
         },
-        imageUrl: "https://example.com/images/lesson2.png",
-        icon: "https://example.com/icons/lesson2.png",
-        content: {
-          type: "video",
-          url: "https://example.com/videos/lesson2.mp4",
-        },
-        challenges: [],
-        status: "locked",
-      },
-
-      {
-        id: 3,
-        name: { en: "Primitive types", es: "Lección 2" },
-        description: {
-          en: "Do you know the primitive types?",
-          es: "Tipos básicos en TypeScript",
-        },
-        imageUrl: "https://example.com/images/lesson2.png",
-        icon: "https://example.com/icons/lesson2.png",
-        content: {
-          type: "video",
-          url: "https://example.com/videos/lesson2.mp4",
-        },
-        challenges: [],
-        status: "locked",
+        content:
+          "Understand how to work with functions in TypeScript, including typed parameters and return types.",
+        challenges: [
+          {
+            id: 3,
+            name: "Functions Challenge",
+            description: "Test your knowledge of functions in TypeScript.",
+            type: "exam",
+            content: "Solve these function-related problems.",
+            passingScore: 70,
+            question: "What is the correct way to define a function type?",
+            status: "unlocked",
+            options: [
+              {
+                id: 1,
+                optionText: "function add(a: number, b: number): number",
+                isCorrect: true,
+              },
+              {
+                id: 2,
+                optionText: "add(a: string, b: string): void",
+                isCorrect: false,
+              },
+              {
+                id: 3,
+                optionText: "function add(a, b) -> int",
+                isCorrect: false,
+              },
+            ],
+          },
+        ],
+        status: "unlocked",
       },
       {
         id: 4,
-        name: { en: "OOP", es: "Lección 2" },
+        name: { en: "Functions in TypeScript", es: "Funciones en TypeScript" },
         description: {
-          en: "Object Oriented Programming",
-          es: "Tipos básicos en TypeScript",
+          en: "Learn how to define and use functions.",
+          es: "Aprende a definir y usar funciones.",
         },
-        imageUrl: "https://example.com/images/lesson2.png",
-        icon: "https://example.com/icons/lesson2.png",
-        content: {
-          type: "video",
-          url: "https://example.com/videos/lesson2.mp4",
-        },
-        challenges: [],
-        status: "locked",
+        content:
+          "Understand how to work with functions in TypeScript, including typed parameters and return types.",
+        challenges: [
+          {
+            id: 4,
+            name: "Functions Challenge",
+            description: "Test your knowledge of functions in TypeScript.",
+            type: "exam",
+            content: "Solve these function-related problems.",
+            passingScore: 70,
+            question: "What is the correct way to define a function type?",
+            status: "unlocked",
+            options: [
+              {
+                id: 1,
+                optionText: "function add(a: number, b: number): number",
+                isCorrect: true,
+              },
+              {
+                id: 2,
+                optionText: "add(a: string, b: string): void",
+                isCorrect: false,
+              },
+              {
+                id: 3,
+                optionText: "function add(a, b) -> int",
+                isCorrect: false,
+              },
+            ],
+          },
+        ],
+        status: "unlocked",
       },
       {
-        id: 5,
-        name: { en: "Single Responsability", es: "Lección 2" },
+        id: 6,
+        name: { en: "Functions in TypeScript", es: "Funciones en TypeScript" },
         description: {
-          en: "What Is Single Responsability Principle",
-          es: "Tipos básicos en TypeScript",
+          en: "Learn how to define and use functions.",
+          es: "Aprende a definir y usar funciones.",
         },
-        imageUrl: "https://example.com/images/lesson2.png",
-        icon: "https://example.com/icons/lesson2.png",
-        content: {
-          type: "video",
-          url: "https://example.com/videos/lesson2.mp4",
-        },
-        challenges: [],
-        status: "locked",
+        content:
+          "Understand how to work with functions in TypeScript, including typed parameters and return types.",
+        challenges: [
+          {
+            id: 3,
+            name: "Functions Challenge",
+            description: "Test your knowledge of functions in TypeScript.",
+            type: "exam",
+            content: "Solve these function-related problems.",
+            passingScore: 70,
+            question: "What is the correct way to define a function type?",
+            status: "unlocked",
+            options: [
+              {
+                id: 1,
+                optionText: "function add(a: number, b: number): number",
+                isCorrect: true,
+              },
+              {
+                id: 2,
+                optionText: "add(a: string, b: string): void",
+                isCorrect: false,
+              },
+              {
+                id: 3,
+                optionText: "function add(a, b) -> int",
+                isCorrect: false,
+              },
+            ],
+          },
+        ],
+        status: "unlocked",
       },
     ],
-    count: 1,
   },
 ];
+
+export default modulesMock;

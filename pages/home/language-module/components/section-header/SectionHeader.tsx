@@ -2,8 +2,8 @@ import { ThemedText } from "@/components/ThemedText";
 import { ThemedView } from "@/components/ThemedView";
 import { StyleSheet, View } from "react-native";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
-import BounceButton from "../../../../ui-library/bounce-button/BounceButton";
 import { LanguageBackground } from "@/models";
+import BounceButton from "@/components/ui-library/bounce-button/BounceButton";
 
 interface SectionHeaderProps {
   title: string;

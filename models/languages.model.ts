@@ -58,17 +58,15 @@ export interface IChallenge {
   type: "task" | "exam"; // Type of challenge
   content: string | MultimediaContent; // Content or instructions
   passingScore?: number; // Optional, only for 'exam' type challenges
-  questions?: IQuestion[]; // Optional, only for 'exam' type challenges
-}
+  question: string;
+  status: ChallengeStatus;
 
-interface IQuestion {
-  id: number;
-  questionText: string;
   options: IOption[]; // Possible answers for multiple-choice questions
-  correctAnswer: string; // The correct answer
 }
 
-interface IOption {
+export type ChallengeStatus = "locked" | "unlocked" | "completed";
+
+export interface IOption {
   id: number;
   optionText: string; // Text of the answer option
   isCorrect: boolean; // Indicates if this option is the correct one
