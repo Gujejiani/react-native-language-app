@@ -5,33 +5,43 @@ import { ThemedView } from "@/components/ThemedView";
 import { Entypo } from "@expo/vector-icons";
 
 import { IChallenge } from "@/models";
+import ChallengeButton from "../../components/Challange-Button";
 
 interface QuickQuizChallengeProps {
   challenge: IChallenge;
-
-  correctlyAnswered: () => void;
+  questionAnswered: (answerIsCorrect: boolean) => void;
 }
 
 export const QuickQuizChallenge: React.FC<QuickQuizChallengeProps> = ({
   challenge,
-  correctlyAnswered,
+  questionAnswered,
 }) => {
   // const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [selectedOption, setSelectedOption] = useState<null | number>(null);
-  const [isAnswered, setIsAnswered] = useState(false);
 
+  const [isCorrect, setIsCorrect] = useState(false);
+  const [answerChecked, setAnswerChecked] = useState(false);
   const currentQuestion = challenge.question;
 
   const handleOptionPress = (optionId: number, isCorrect: boolean) => {
     setSelectedOption(optionId);
-    setIsAnswered(true);
+    console.log("Option Pressed: ", optionId);
+  };
 
-    // Handle correct answer logic here, like updating progress, etc.
-    if (isCorrect) {
-      console.log("Correct Answer!");
-      correctlyAnswered();
+  const buttonClickHandler = () => {
+    if (answerChecked) {
+      questionAnswered(isCorrect);
+
+      return;
+    }
+    setAnswerChecked(true);
+    const correct = challenge.options.find(
+      (option) => option.id === selectedOption,
+    )?.isCorrect;
+    if (correct) {
+      setIsCorrect(true);
     } else {
-      console.log("Wrong Answer");
+      setIsCorrect(false);
     }
   };
 
@@ -39,19 +49,19 @@ export const QuickQuizChallenge: React.FC<QuickQuizChallengeProps> = ({
     challenge.options.map((option) => (
       <TouchableOpacity
         key={option.id}
+        disabled={answerChecked}
         style={[
           styles.optionButton,
-          selectedOption === option.id && isAnswered
-            ? option.isCorrect
-              ? styles.correctOption
+          selectedOption === option.id && selectedOption
+            ? option.isCorrect || !answerChecked
+              ? styles.selectedOption
               : styles.wrongOption
             : {},
         ]}
         onPress={() => handleOptionPress(option.id, option.isCorrect)}
-        disabled={isAnswered}
       >
         <Text style={styles.optionText}>{option.optionText}</Text>
-        {selectedOption === option.id && isAnswered && (
+        {selectedOption === option.id && selectedOption && answerChecked && (
           <Entypo
             name={option.isCorrect ? "check" : "cross"}
             size={20}
@@ -68,6 +78,15 @@ export const QuickQuizChallenge: React.FC<QuickQuizChallengeProps> = ({
         <Text style={styles.questionText}>{currentQuestion}</Text>
         <View style={styles.optionsContainer}>{renderOptions()}</View>
       </View>
+
+      <View>
+        <ChallengeButton
+          style={!isCorrect && answerChecked ? styles.wrongAnswer : {}}
+          onClick={buttonClickHandler}
+          disabled={!selectedOption}
+          buttonText={selectedOption && answerChecked ? "Continue" : "Check"}
+        ></ChallengeButton>
+      </View>
     </ThemedView>
   );
 };
@@ -75,7 +94,11 @@ export const QuickQuizChallenge: React.FC<QuickQuizChallengeProps> = ({
 export default QuickQuizChallenge;
 
 const styles = StyleSheet.create({
-  container: {},
+  container: {
+    justifyContent: "space-between",
+    flex: 1,
+  },
+  wrongAnswer: {},
   questionContainer: {
     marginTop: 50,
   },
@@ -101,7 +124,7 @@ const styles = StyleSheet.create({
   optionIcon: {
     marginLeft: 10,
   },
-  correctOption: {
+  selectedOption: {
     backgroundColor: "#4CAF50",
   },
   wrongOption: {

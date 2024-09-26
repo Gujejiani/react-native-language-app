@@ -25,7 +25,7 @@ const LessonScreen: React.FC<{}> = (props) => {
     console.log("switch to next challenge");
   };
 
-  const correctlyAnswered = () => {
+  const questionAnswered = (isCorrect: boolean) => {
     setNextChallengeUnlocked(true);
   };
 
@@ -53,7 +53,7 @@ const LessonScreen: React.FC<{}> = (props) => {
             progress={progress}
             navigateToHome={navigateToHomeHandler}
             challengeCompleted={challengeCompletedHandler}
-            correctlyAnswered={correctlyAnswered}
+            questionAnswered={questionAnswered}
           />
         ) : (
           ""

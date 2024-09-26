@@ -10,7 +10,7 @@ interface ChallengeProps {
   progress: number;
   challenge: IChallenge;
   challengeCompleted: () => void;
-  correctlyAnswered: () => void;
+  questionAnswered: (isCorrect: boolean) => void;
   nextChallengeUnlocked: boolean;
 }
 
@@ -19,7 +19,7 @@ export const Challenge: React.FC<ChallengeProps> = ({
   progress,
   challenge,
   challengeCompleted,
-  correctlyAnswered,
+  questionAnswered,
   nextChallengeUnlocked,
 }) => {
   // const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
@@ -28,27 +28,17 @@ export const Challenge: React.FC<ChallengeProps> = ({
     <ThemedView style={styles.container}>
       <LessonHeader navigateToHome={navigateToHome} progress={progress} />
 
-      <View style={styles.content}>
-        <View style={styles.challenge}>
-          <QuickQuizChallenge
-            correctlyAnswered={correctlyAnswered}
-            challenge={challenge}
-          />
-        </View>
-
-        <View style={styles.buttonContainer}>
-          <TouchableOpacity
-            disabled={!nextChallengeUnlocked}
-            style={[
-              styles.nextButton,
-              !nextChallengeUnlocked ? styles.nextButtonDisabled : {},
-            ]}
-            onPress={challengeCompleted}
-          >
-            <Text style={styles.buttonText}>Continue</Text>
-          </TouchableOpacity>
-        </View>
+      <View style={styles.challenge}>
+        <QuickQuizChallenge
+          questionAnswered={questionAnswered}
+          challenge={challenge}
+        />
       </View>
+
+      {/* <View style={styles.buttonContainer}>
+        <ChallengeButton  onClick={questionAnswered} disabled={isSelected} buttonText={isSelected && checkAnswer? 'Continue': 'Check'} ></ChallengeButton>  
+
+        </View> */}
     </ThemedView>
   );
 };
@@ -65,7 +55,9 @@ const styles = StyleSheet.create({
     textTransform: "uppercase",
     fontWeight: "bold",
   },
-  challenge: {},
+  challenge: {
+    flex: 1,
+  },
   content: {
     flex: 1,
     justifyContent: "space-between",
