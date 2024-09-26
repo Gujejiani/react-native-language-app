@@ -55,13 +55,13 @@ export interface IChallenge {
   id: number;
   name: string;
   description: string;
-  type: "task" | "exam" | "quiz";
-  content: string | MultimediaContent; // Content or instructions
-  passingScore?: number; // Optional, only for 'exam' type challenges
+  type: "task" | "exam" | "quiz" | "insert-suggestion";
+  content: string | MultimediaContent;
+  passingScore?: number;
   question: string;
   status: ChallengeStatus;
 
-  options: IOption[]; // Possible answers for multiple-choice questions
+  options: IOption[];
 }
 
 export type ChallengeStatus = "locked" | "unlocked" | "completed";

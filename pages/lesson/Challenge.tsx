@@ -4,6 +4,7 @@ import { ThemedView } from "@/components/ThemedView";
 import LessonHeader from "./components/Lesson-Header";
 import { IChallenge } from "@/models";
 import QuickQuizChallenge from "./challenge-types/QuickQuiz/QuickQuiz";
+import TypeScriptQuiz from "./challenge-types/ScriptQuiz/TypeScriptQuiz";
 
 interface ChallengeProps {
   navigateToHome: () => void;
@@ -18,7 +19,6 @@ export const Challenge: React.FC<ChallengeProps> = ({
   navigateToHome,
   progress,
   challenge,
-  challengeCompleted,
   questionAnswered,
   nextChallengeUnlocked,
 }) => {
@@ -29,10 +29,17 @@ export const Challenge: React.FC<ChallengeProps> = ({
       <LessonHeader navigateToHome={navigateToHome} progress={progress} />
 
       <View style={styles.challenge}>
-        <QuickQuizChallenge
-          questionAnswered={questionAnswered}
-          challenge={challenge}
-        />
+        {challenge.type === "quiz" ? (
+          <QuickQuizChallenge
+            questionAnswered={questionAnswered}
+            challenge={challenge}
+          />
+        ) : (
+          <TypeScriptQuiz
+            challenge={challenge}
+            questionAnswered={questionAnswered}
+          />
+        )}
       </View>
 
       {/* <View style={styles.buttonContainer}>

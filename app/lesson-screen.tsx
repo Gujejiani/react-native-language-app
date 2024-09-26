@@ -5,7 +5,7 @@ import { ThemedView } from "@/components/ThemedView";
 import { ThemedText } from "@/components/ThemedText";
 import { router, Stack, useLocalSearchParams } from "expo-router";
 
-import { ILesson } from "@/models";
+import { IChallenge, ILesson } from "@/models";
 import modulesMock from "@/mock/language.mock";
 import Challenge from "@/pages/lesson/Challenge";
 
@@ -17,6 +17,13 @@ const LessonScreen: React.FC<{}> = (props) => {
 
   const [nextChallengeUnlocked, setNextChallengeUnlocked] = useState(false);
 
+  const [currentChallenge, setCurrentChallenge] = useState<IChallenge>();
+
+  useEffect(() => {
+    if (lesson) {
+      setCurrentChallenge(lesson.challenges[0]);
+    }
+  });
   const navigateToHomeHandler = () => {
     router.navigate("/home-screen");
   };
@@ -26,7 +33,11 @@ const LessonScreen: React.FC<{}> = (props) => {
   };
 
   const questionAnswered = (isCorrect: boolean) => {
-    setNextChallengeUnlocked(true);
+    if (isCorrect) {
+      setCurrentChallenge(lesson?.challenges[1]);
+    } else {
+      console.log("Wrong Answer");
+    }
   };
 
   useEffect(() => {
@@ -46,10 +57,10 @@ const LessonScreen: React.FC<{}> = (props) => {
     <>
       <Stack.Screen options={{ title: "Oops!", headerShown: false }} />
       <ThemedView style={styles.container}>
-        {lesson?.challenges.length ? (
+        {currentChallenge ? (
           <Challenge
             nextChallengeUnlocked={nextChallengeUnlocked}
-            challenge={lesson.challenges[0]}
+            challenge={currentChallenge}
             progress={progress}
             navigateToHome={navigateToHomeHandler}
             challengeCompleted={challengeCompletedHandler}

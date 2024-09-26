@@ -98,7 +98,9 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     flex: 1,
   },
-  wrongAnswer: {},
+  wrongAnswer: {
+    backgroundColor: "red",
+  },
   questionContainer: {
     marginTop: 50,
   },
