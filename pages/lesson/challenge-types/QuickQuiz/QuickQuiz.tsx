@@ -8,10 +8,13 @@ import { IChallenge } from "@/models";
 
 interface QuickQuizChallengeProps {
   challenge: IChallenge;
+
+  correctlyAnswered: () => void;
 }
 
 export const QuickQuizChallenge: React.FC<QuickQuizChallengeProps> = ({
   challenge,
+  correctlyAnswered,
 }) => {
   // const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [selectedOption, setSelectedOption] = useState<null | number>(null);
@@ -26,6 +29,7 @@ export const QuickQuizChallenge: React.FC<QuickQuizChallengeProps> = ({
     // Handle correct answer logic here, like updating progress, etc.
     if (isCorrect) {
       console.log("Correct Answer!");
+      correctlyAnswered();
     } else {
       console.log("Wrong Answer");
     }
@@ -71,12 +75,9 @@ export const QuickQuizChallenge: React.FC<QuickQuizChallengeProps> = ({
 export default QuickQuizChallenge;
 
 const styles = StyleSheet.create({
-  container: {
-    paddingHorizontal: 16,
-  },
+  container: {},
   questionContainer: {
     marginTop: 50,
-    paddingHorizontal: 10,
   },
   questionText: {
     fontSize: 18,

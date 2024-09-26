@@ -55,7 +55,7 @@ export interface IChallenge {
   id: number;
   name: string;
   description: string;
-  type: "task" | "exam"; // Type of challenge
+  type: "task" | "exam" | "quiz";
   content: string | MultimediaContent; // Content or instructions
   passingScore?: number; // Optional, only for 'exam' type challenges
   question: string;
