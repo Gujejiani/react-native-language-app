@@ -23,7 +23,7 @@ export default function TabLayout() {
       }}
     >
       <Tabs.Screen
-        name="home-screen"
+        name="index"
         options={{
           title: "Home",
           // href: null if you want to hide

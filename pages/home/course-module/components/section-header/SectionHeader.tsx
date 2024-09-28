@@ -2,14 +2,14 @@ import { ThemedText } from "@/components/ThemedText";
 import { ThemedView } from "@/components/ThemedView";
 import { StyleSheet, View } from "react-native";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
-import { LanguageBackground } from "@/models";
+import { CourseBackground } from "@/models";
 import BounceButton from "@/components/ui-library/bounce-button/BounceButton";
 
 interface SectionHeaderProps {
   title: string;
   description: string;
   onPress?: () => void;
-  sectionBackgroundColor?: LanguageBackground; // Add sectionId or sectionType prop
+  sectionBackgroundColor?: CourseBackground; // Add sectionId or sectionType prop
 }
 
 const SectionHeader: React.FC<SectionHeaderProps> = ({

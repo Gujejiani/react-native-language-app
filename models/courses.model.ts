@@ -1,8 +1,8 @@
-export interface ILanguages {
-  languages: ILanguage[];
+export interface ICourses {
+  languages: ICourse[];
 }
 
-export interface ILanguage {
+export interface ICourse {
   id: number;
   name: LocalizedString;
   description: LocalizedString;
@@ -34,7 +34,7 @@ export interface IModule {
   icon?: string;
   lessons: ILesson[];
   count: number;
-  moduleColor: LanguageBackground;
+  moduleColor: CourseBackground;
 }
 
 export interface ILesson {
@@ -83,9 +83,9 @@ interface LocalizedString {
   // add other languages as needed
 }
 
-export type LanguageBackground = LanguageHeaderBackgroundEnum;
+export type CourseBackground = CourseHeaderBackgroundEnum;
 
-export enum LanguageHeaderBackgroundEnum {
+export enum CourseHeaderBackgroundEnum {
   Pink = "#D81B60",
   LightBlue = "#1E3A8A",
   LightGreen = "#2F855A",

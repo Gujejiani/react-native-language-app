@@ -6,7 +6,7 @@ import { ThemedText } from "@/components/ThemedText";
 import { router, Stack, useLocalSearchParams } from "expo-router";
 
 import { IChallenge, ILesson } from "@/models";
-import modulesMock from "@/mock/language.mock";
+import modulesMock from "@/mock/course.mock";
 import Challenge from "@/pages/lesson/Challenge";
 
 const modules = modulesMock;
@@ -25,7 +25,7 @@ const LessonScreen: React.FC<{}> = (props) => {
     }
   });
   const navigateToHomeHandler = () => {
-    router.navigate("/home-screen");
+    router.navigate("/");
   };
 
   const challengeCompletedHandler = () => {

@@ -29,7 +29,7 @@ const BounceButton: React.FC<BounceButtonProps> = ({
       if (onPress) {
         onPress();
       }
-    }, 400);
+    }, 40);
 
     return () => {
       clearTimeout(timer);

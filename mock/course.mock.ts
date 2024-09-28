@@ -1,6 +1,6 @@
-import { IModule, LanguageHeaderBackgroundEnum } from "@/models";
+import { IModule, CourseHeaderBackgroundEnum } from "@/models";
 
-// Mock Data for ILanguages
+// Mock Data for ICourses
 const modulesMock: IModule[] = [
   {
     id: 1,
@@ -12,7 +12,7 @@ const modulesMock: IModule[] = [
     imageUrl: "https://example.com/module1.png",
     icon: "syntax-icon",
     count: 10,
-    moduleColor: LanguageHeaderBackgroundEnum.Pink,
+    moduleColor: CourseHeaderBackgroundEnum.Pink,
     lessons: [
       {
         id: 1,
@@ -155,7 +155,7 @@ const modulesMock: IModule[] = [
     imageUrl: "https://example.com/module2.png",
     icon: "datatype-icon",
     count: 8,
-    moduleColor: LanguageHeaderBackgroundEnum.LightBlue,
+    moduleColor: CourseHeaderBackgroundEnum.LightBlue,
     lessons: [
       {
         id: 2,
@@ -277,7 +277,7 @@ const modulesMock: IModule[] = [
     imageUrl: "https://example.com/module3.png",
     icon: "functions-icon",
     count: 7,
-    moduleColor: LanguageHeaderBackgroundEnum.LightGreen,
+    moduleColor: CourseHeaderBackgroundEnum.LightGreen,
     lessons: [
       {
         id: 3,

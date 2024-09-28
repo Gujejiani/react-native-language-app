@@ -8,14 +8,14 @@ import { ScrollView } from "react-native-gesture-handler";
 import Animated from "react-native-reanimated";
 import { router } from "expo-router";
 
-interface LanguageModuleProps {
+interface CourseModuleProps {
   module: IModule;
   scrollViewRef: React.RefObject<Animated.ScrollView>;
   scrollY: number; // Receive shared scroll value
   updateModulePosition: (id: number, positionY: number) => void;
 }
 
-export const LanguageModule: React.FC<LanguageModuleProps> = ({
+export const CourseModule: React.FC<CourseModuleProps> = ({
   module,
   scrollViewRef,
   scrollY,

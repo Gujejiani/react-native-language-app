@@ -1,13 +1,13 @@
 import { StyleSheet } from "react-native";
 import { ThemedView } from "@/components/ThemedView";
-import { IModule, LanguageBackground } from "@/models";
+import { IModule, CourseBackground } from "@/models";
 import Animated from "react-native-reanimated";
 import * as Haptics from "expo-haptics";
 import { useCallback, useEffect, useRef, useState } from "react";
-import { LanguageModule } from "@/pages/home/language-module/Language-module";
 import HomeScreenHeader from "@/pages/home/header/Header";
-import SectionHeader from "@/pages/home/language-module/components/section-header/SectionHeader";
-import modulesMock from "@/mock/language.mock";
+import SectionHeader from "@/pages/home/course-module/components/section-header/SectionHeader";
+import modulesMock from "@/mock/course.mock";
+import { CourseModule } from "@/pages/home/course-module/Course-module";
 
 export default function HomeScreen() {
   const modules: IModule[] = modulesMock;
@@ -82,13 +82,13 @@ export default function HomeScreen() {
         <ThemedView style={styles.container}>
           {modules.map((module) => {
             return (
-              <LanguageModule
+              <CourseModule
                 updateModulePosition={setModulePositionsYHandler}
                 scrollY={currentScrollY}
                 scrollViewRef={scrollRef}
                 key={module.id}
                 module={module}
-              ></LanguageModule>
+              ></CourseModule>
             );
           })}
         </ThemedView>
