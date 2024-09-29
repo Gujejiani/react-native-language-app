@@ -1,7 +1,7 @@
 import { ThemedView } from "@/components/ThemedView";
 import { IUnit } from "@/models/";
-import React, { useEffect, useState } from "react";
-import { StyleSheet, View, LayoutChangeEvent } from "react-native";
+import React from "react";
+import { StyleSheet, LayoutChangeEvent } from "react-native";
 import UnitTitle from "./components/module-title/UnitTitle";
 import Lesson from "./components/lesson/Lesson";
 import { ScrollView } from "react-native-gesture-handler";
