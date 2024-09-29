@@ -2,7 +2,7 @@ import { ThemedView } from "@/components/ThemedView";
 import { IUnit } from "@/models/";
 import React, { useEffect, useState } from "react";
 import { StyleSheet, View, LayoutChangeEvent } from "react-native";
-import ModuleTitle from "./components/module-title/ModuleTitle";
+import UnitTitle from "./components/module-title/UnitTitle";
 import Lesson from "./components/lesson/Lesson";
 import { ScrollView } from "react-native-gesture-handler";
 import Animated from "react-native-reanimated";
@@ -66,7 +66,7 @@ export const CourseModule: React.FC<CourseModuleProps> = ({
 
   return (
     <ThemedView style={styles.moduleContainer} onLayout={handleLayout}>
-      <ModuleTitle title={module.name.en} />
+      <UnitTitle title={module.name.en} />
       {moduleLessons}
     </ThemedView>
   );

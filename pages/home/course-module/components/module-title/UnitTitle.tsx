@@ -4,7 +4,7 @@ import { useCustomThemeContext } from "@/context/theme/themeProvider";
 import { StyleSheet } from "react-native";
 import { Colors } from "@/constants/Colors";
 
-export const ModuleTitle: React.FC<{ title: string }> = ({ title }) => {
+export const UnitTitle: React.FC<{ title: string }> = ({ title }) => {
   const themeContext = useCustomThemeContext();
 
   const color = Colors[themeContext.theme].textSecondaryColor;
@@ -20,7 +20,7 @@ export const ModuleTitle: React.FC<{ title: string }> = ({ title }) => {
   );
 };
 
-export default ModuleTitle;
+export default UnitTitle;
 
 const styles = StyleSheet.create({
   titleContainer: {
