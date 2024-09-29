@@ -31,7 +31,7 @@ const modulesMock: IModule[] = [
             type: "quiz",
             content: "What is TypeScript?",
             passingScore: 80,
-            question: "What is TypeScript?",
+            question: "What is TypeScript? JJ",
             status: "unlocked",
             options: [
               {
@@ -42,6 +42,25 @@ const modulesMock: IModule[] = [
               { id: 2, optionText: "A CSS framework", isCorrect: false },
               { id: 3, optionText: "A database language", isCorrect: false },
               { id: 4, optionText: "java type checker", isCorrect: false },
+            ],
+          },
+          {
+            id: 2,
+            name: "Basic Question",
+            description: "Answer this basic TypeScript question.",
+            type: "insert-suggestion",
+            content: "What is TypeScript? kk",
+            passingScore: 80,
+            question: "Declare a variable of type number",
+            status: "unlocked",
+            options: [
+              {
+                id: 1,
+                optionText: "let distance: number",
+                isCorrect: true,
+              },
+              { id: 2, optionText: "let distance = 0;", isCorrect: false },
+              { id: 3, optionText: "distance = 100;", isCorrect: false },
             ],
           },
         ],

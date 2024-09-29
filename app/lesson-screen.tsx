@@ -23,7 +23,7 @@ const LessonScreen: React.FC<{}> = (props) => {
     if (lesson) {
       setCurrentChallenge(lesson.challenges[0]);
     }
-  });
+  }, [lesson]);
   const navigateToHomeHandler = () => {
     router.navigate("/");
   };
@@ -33,25 +33,30 @@ const LessonScreen: React.FC<{}> = (props) => {
   };
 
   const questionAnswered = (isCorrect: boolean) => {
-    if (isCorrect) {
-      setCurrentChallenge(lesson?.challenges[1]);
+    if (isCorrect && lesson) {
+      console.log("Correct Answer", lesson.challenges[1].question);
     } else {
       console.log("Wrong Answer");
     }
+    setCurrentChallenge(() => {
+      return lesson?.challenges[1];
+    });
   };
 
   useEffect(() => {
     if (lessonID) {
-      const lesson = modules
-        .flatMap((module) => module.lessons)
-        .find((lesson) => lesson.id === Number(lessonID));
-      if (lesson) {
-        setLesson(lesson);
-        // console.log(lesson);
-      }
+      // const lesson = modules
+      //   .flatMap((module) => module.lessons)
+      //   .find((lesson) => lesson.id === Number(lessonID));
+      // if (lesson) {
+      //   setLesson(lesson);
+      //   // console.log(lesson);
+      // }
+      const lesson = modules[0].lessons[0];
+      setLesson(lesson);
     }
     console.log("lesson props ", lessonID);
-  }, [props]);
+  }, []);
 
   return (
     <>

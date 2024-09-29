@@ -1,5 +1,5 @@
 export interface ICourses {
-  languages: ICourse[];
+  courses: ICourse[];
 }
 
 export interface ICourse {
