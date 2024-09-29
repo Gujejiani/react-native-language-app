@@ -23,18 +23,11 @@ export interface IUnit {
   id: number;
   name: LocalizedString;
   description: LocalizedString;
-  modules: IModule[];
-}
-
-export interface IModule {
-  id: number;
-  name: LocalizedString;
-  description: LocalizedString;
   imageUrl?: string;
   icon?: string;
   lessons: ILesson[];
   count: number;
-  moduleColor: CourseBackground;
+  unitColor: CourseBackground;
 }
 
 export interface ILesson {

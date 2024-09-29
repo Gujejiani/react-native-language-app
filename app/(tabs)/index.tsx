@@ -1,6 +1,6 @@
 import { StyleSheet } from "react-native";
 import { ThemedView } from "@/components/ThemedView";
-import { IModule, CourseBackground } from "@/models";
+import { IUnit, CourseBackground } from "@/models";
 import Animated from "react-native-reanimated";
 import * as Haptics from "expo-haptics";
 import { useCallback, useEffect, useRef, useState } from "react";
@@ -10,12 +10,12 @@ import modulesMock from "@/mock/course.mock";
 import { CourseModule } from "@/pages/home/course-module/Course-module";
 
 export default function HomeScreen() {
-  const modules: IModule[] = modulesMock;
+  const modules: IUnit[] = modulesMock;
   const scrollRef = useRef<Animated.ScrollView>(null);
 
   const [currentScrollY, setCurrentScrollY] = useState(0);
 
-  const [visibleModule, setVisibleModule] = useState<IModule>(modules[0]);
+  const [visibleModule, setVisibleModule] = useState<IUnit>(modules[0]);
 
   // module id => positionY
   const [modulePositionsY, setModulePositionsY] = useState<
@@ -69,7 +69,7 @@ export default function HomeScreen() {
       <HomeScreenHeader></HomeScreenHeader>
 
       <SectionHeader
-        sectionBackgroundColor={visibleModule.moduleColor}
+        sectionBackgroundColor={visibleModule.unitColor}
         title={visibleModule.name.en}
         description={visibleModule.description.en}
       ></SectionHeader>

@@ -1,5 +1,5 @@
 import { ThemedView } from "@/components/ThemedView";
-import { IModule } from "@/models/";
+import { IUnit } from "@/models/";
 import React, { useEffect, useState } from "react";
 import { StyleSheet, View, LayoutChangeEvent } from "react-native";
 import ModuleTitle from "./components/module-title/ModuleTitle";
@@ -9,7 +9,7 @@ import Animated from "react-native-reanimated";
 import { router } from "expo-router";
 
 interface CourseModuleProps {
-  module: IModule;
+  module: IUnit;
   scrollViewRef: React.RefObject<Animated.ScrollView>;
   scrollY: number; // Receive shared scroll value
   updateModulePosition: (id: number, positionY: number) => void;
