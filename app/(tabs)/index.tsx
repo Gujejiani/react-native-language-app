@@ -8,8 +8,15 @@ import HomeScreenHeader from "@/pages/home/header/Header";
 import SectionHeader from "@/pages/home/course-module/components/section-header/SectionHeader";
 import modulesMock from "@/mock/course.mock";
 import { CourseModule } from "@/pages/home/course-module/Course-module";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "@/store/store";
+import { fetchCourses } from "@/store/courses.effects";
 
 export default function HomeScreen() {
+  const dispatch = useDispatch();
+
+  const courses = useSelector((state: RootState) => state.courses);
+
   const modules: IUnit[] = modulesMock;
   const scrollRef = useRef<Animated.ScrollView>(null);
 
@@ -34,7 +41,10 @@ export default function HomeScreen() {
       Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
     }
   };
-
+  useEffect(() => {
+    console.log("fetching courses");
+    dispatch(fetchCourses() as any);
+  }, []);
   useEffect(() => {
     determineVisibleModule(currentScrollY);
   }, [currentScrollY]);
