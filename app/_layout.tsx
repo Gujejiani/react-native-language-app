@@ -13,6 +13,7 @@ import { useColorScheme } from "@/hooks/useColorScheme";
 import { CustomThemeProvider } from "@/context/theme/themeProvider";
 import { Provider } from "react-redux";
 import { store } from "@/store/store";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
@@ -41,22 +42,24 @@ export default function RootLayout() {
   return (
     <CustomThemeProvider onThemeChange={updateTheme}>
       <Provider store={store}>
-        <ThemeProvider
-          value={
-            theme === "dark"
-              ? DarkTheme
-              : theme === "light"
-                ? DefaultTheme
-                : colorScheme === "dark"
-                  ? DarkTheme
-                  : DefaultTheme
-          }
-        >
-          <Stack>
-            <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-            <Stack.Screen name="+not-found" />
-          </Stack>
-        </ThemeProvider>
+        <SafeAreaView style={{ flex: 1 }}>
+          <ThemeProvider
+            value={
+              theme === "dark"
+                ? DarkTheme
+                : theme === "light"
+                  ? DefaultTheme
+                  : colorScheme === "dark"
+                    ? DarkTheme
+                    : DefaultTheme
+            }
+          >
+            <Stack>
+              <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+              <Stack.Screen name="+not-found" />
+            </Stack>
+          </ThemeProvider>
+        </SafeAreaView>
       </Provider>
     </CustomThemeProvider>
   );

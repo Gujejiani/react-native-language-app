@@ -57,7 +57,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     paddingHorizontal: 16,
-    marginTop: 40,
+    marginTop: 20,
     position: "relative",
     top: 36,
     zIndex: 100,
