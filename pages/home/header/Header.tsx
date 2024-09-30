@@ -6,15 +6,28 @@ import { useCustomThemeContext } from "@/context/theme/themeProvider";
 import { Colors } from "@/constants/Colors";
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
+import ChooseCourseModal from "../course-module/components/choose-course-modal/chooseCourseModal";
+import { ICourse } from "@/models";
+import { useState } from "react";
 
-export const HomeScreenHeader = () => {
+interface HomeScreenHeaderProps {
+  courses: ICourse[];
+}
+export const HomeScreenHeader: React.FC<HomeScreenHeaderProps> = ({
+  courses,
+}) => {
   const themeContext = useCustomThemeContext();
+
+  const [showChooseCourseModal, setShowChooseCourseModal] = useState(false);
 
   const iconColor = Colors[themeContext.theme].tint;
 
+  const showCourseHandler = () => {
+    setShowChooseCourseModal(true);
+  };
   return (
     <ThemedView style={styles.container}>
-      <TouchableOpacity>
+      <TouchableOpacity onPress={showCourseHandler}>
         <Ionicons name="flag" size={24} color={iconColor} />
       </TouchableOpacity>
 
@@ -37,6 +50,12 @@ export const HomeScreenHeader = () => {
           <FontAwesome6 name="earlybirds" size={24} color={iconColor} />
         </View>
       </TouchableOpacity>
+
+      <ChooseCourseModal
+        courses={courses}
+        isVisible={showChooseCourseModal}
+        onClose={() => setShowChooseCourseModal(false)}
+      />
     </ThemedView>
   );
 };

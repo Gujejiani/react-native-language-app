@@ -76,7 +76,7 @@ export default function HomeScreen() {
 
   return (
     <ThemedView>
-      <HomeScreenHeader></HomeScreenHeader>
+      <HomeScreenHeader courses={courses.courses}></HomeScreenHeader>
 
       <SectionHeader
         sectionBackgroundColor={visibleModule.unitColor}
