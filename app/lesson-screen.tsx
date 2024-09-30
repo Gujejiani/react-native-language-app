@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { StyleSheet, View } from "react-native";
-import { Entypo, MaterialIcons } from "@expo/vector-icons";
+import { StyleSheet } from "react-native";
 import { ThemedView } from "@/components/ThemedView";
-import { ThemedText } from "@/components/ThemedText";
 import { router, Stack, useLocalSearchParams } from "expo-router";
 
 import { IChallenge, ILesson } from "@/models";
@@ -82,7 +80,7 @@ const LessonScreen: React.FC<{}> = (props) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 80,
+
     paddingHorizontal: 16,
   },
 });

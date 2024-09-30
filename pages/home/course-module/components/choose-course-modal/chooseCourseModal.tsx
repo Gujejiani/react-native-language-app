@@ -9,6 +9,7 @@ import {
   TouchableWithoutFeedback,
   StyleSheet,
   Animated,
+  SafeAreaView,
 } from "react-native";
 import { ICourse } from "@/models";
 
@@ -67,48 +68,48 @@ export const ChooseCourseModal: React.FC<ChooseCourseModalProps> = ({
     <Modal transparent={true} visible={innerVisible} onRequestClose={onClose}>
       {/* Animated overlay for smooth opacity transition */}
       <TouchableWithoutFeedback onPress={onClose}>
-        <Animated.View
-          style={[styles.modalBackground, { opacity: opacityAnim }]}
-        >
-          <TouchableWithoutFeedback>
-            <Animated.View
-              style={[
-                styles.modalContainer,
-                { transform: [{ translateY: slideAnim }] },
-              ]}
-            >
-              <Text style={styles.title}>Choose a Course</Text>
-
-              {/* Horizontal scrolling of courses */}
-              <ScrollView
-                horizontal
-                contentContainerStyle={styles.listContainer}
-                showsHorizontalScrollIndicator={false}
+        <SafeAreaView style={{ flex: 1 }}>
+          <Animated.View
+            style={[styles.modalBackground, { opacity: opacityAnim }]}
+          >
+            <TouchableWithoutFeedback>
+              <Animated.View
+                style={[
+                  styles.modalContainer,
+                  { transform: [{ translateY: slideAnim }] },
+                ]}
               >
-                {/* Render courses */}
-                {courses.map((course) => (
-                  <View key={course.id} style={styles.courseItem}>
-                    <Image
-                      source={{ uri: course.imageUrl }}
-                      style={styles.courseImage}
-                    />
-                    <Text style={styles.courseName}>{course.name.en}</Text>
-                  </View>
-                ))}
-                {/* Add Course button */}
-                <TouchableOpacity
-                  style={styles.courseItem}
-                  onPress={() => console.log("Add Course pressed")}
+                {/* Horizontal scrolling of courses */}
+                <ScrollView
+                  horizontal
+                  contentContainerStyle={styles.listContainer}
+                  showsHorizontalScrollIndicator={false}
                 >
-                  <View style={styles.addCourseImage}>
-                    <Text style={styles.addCourseText}>+</Text>
-                  </View>
-                  <Text style={styles.courseName}>Add Course</Text>
-                </TouchableOpacity>
-              </ScrollView>
-            </Animated.View>
-          </TouchableWithoutFeedback>
-        </Animated.View>
+                  {/* Render courses */}
+                  {courses.map((course) => (
+                    <View key={course.id} style={styles.courseItem}>
+                      <Image
+                        source={{ uri: course.imageUrl }}
+                        style={styles.courseImage}
+                      />
+                      <Text style={styles.courseName}>{course.name.en}</Text>
+                    </View>
+                  ))}
+                  {/* Add Course button */}
+                  <TouchableOpacity
+                    style={styles.courseItem}
+                    onPress={() => console.log("Add Course pressed")}
+                  >
+                    <View style={styles.addCourseImage}>
+                      <Text style={styles.addCourseText}>+</Text>
+                    </View>
+                    <Text style={styles.courseName}>Add Course</Text>
+                  </TouchableOpacity>
+                </ScrollView>
+              </Animated.View>
+            </TouchableWithoutFeedback>
+          </Animated.View>
+        </SafeAreaView>
       </TouchableWithoutFeedback>
     </Modal>
   );
