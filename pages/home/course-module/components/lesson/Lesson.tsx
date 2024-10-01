@@ -30,7 +30,7 @@ const Lesson: React.FC<LessonProps> = ({
 
   const buttonRef = useRef<View>(null);
   const buttonPressHandler = () => {
-    buttonRef.current?.measure((fx, fy, width, height, px, py) => {
+    buttonRef?.current?.measure((fx, fy, width, height, px, py) => {
       setButtonPosition({ x: px, y: py + height });
       setShowModal(true);
     });
