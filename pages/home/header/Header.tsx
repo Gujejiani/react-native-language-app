@@ -12,9 +12,11 @@ import { useState } from "react";
 
 interface HomeScreenHeaderProps {
   courses: ICourse[];
+  courseClicked: (id: number) => void;
 }
 export const HomeScreenHeader: React.FC<HomeScreenHeaderProps> = ({
   courses,
+  courseClicked,
 }) => {
   const themeContext = useCustomThemeContext();
 
@@ -24,6 +26,11 @@ export const HomeScreenHeader: React.FC<HomeScreenHeaderProps> = ({
 
   const showCourseHandler = () => {
     setShowChooseCourseModal(true);
+  };
+
+  const courseClickedHandler = (id: number) => {
+    setShowChooseCourseModal(false);
+    courseClicked(id);
   };
   return (
     <ThemedView style={styles.container}>
@@ -52,6 +59,7 @@ export const HomeScreenHeader: React.FC<HomeScreenHeaderProps> = ({
       </TouchableOpacity>
 
       <ChooseCourseModal
+        onCourseClick={courseClickedHandler}
         courses={courses}
         isVisible={showChooseCourseModal}
         onClose={() => setShowChooseCourseModal(false)}

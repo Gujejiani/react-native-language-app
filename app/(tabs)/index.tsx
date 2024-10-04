@@ -11,9 +11,12 @@ import { CourseModule } from "@/pages/home/course-module/Course-module";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/store/store";
 import { fetchCourses } from "@/store/courses.effects";
+import LoadingModal from "@/ui/modals/loading/Loading";
 
 export default function HomeScreen() {
   const dispatch = useDispatch();
+
+  const [showLoading, setShowLoading] = useState(false);
 
   const courses = useSelector((state: RootState) => state.courses);
 
@@ -28,6 +31,15 @@ export default function HomeScreen() {
   const [modulePositionsY, setModulePositionsY] = useState<
     Record<number, number>
   >([]);
+
+  const courseClickedHandler = (id: number) => {
+    setShowLoading(true);
+    // setTimeout(() => {
+    //   setShowLoading(false);
+    // }, 3000);
+
+    console.log("course clicked index.tsx", id, showLoading);
+  };
 
   const setVisibleModuleHandler = (moduleID: number) => {
     if (moduleID === visibleModule.id) {
@@ -73,10 +85,15 @@ export default function HomeScreen() {
     },
     [],
   );
-
+  console.log("state upd", showLoading);
   return (
     <ThemedView>
-      <HomeScreenHeader courses={courses.courses}></HomeScreenHeader>
+      <LoadingModal visible={showLoading} />
+
+      <HomeScreenHeader
+        courseClicked={courseClickedHandler}
+        courses={courses.courses}
+      ></HomeScreenHeader>
 
       <SectionHeader
         sectionBackgroundColor={visibleModule.unitColor}

@@ -17,12 +17,14 @@ interface ChooseCourseModalProps {
   courses: ICourse[];
   isVisible: boolean;
   onClose: () => void;
+  onCourseClick: (id: number) => void;
 }
 
 export const ChooseCourseModal: React.FC<ChooseCourseModalProps> = ({
   courses,
   isVisible,
   onClose,
+  onCourseClick,
 }) => {
   const slideAnim = useRef(new Animated.Value(-300)).current; // Start hidden above the screen
   const opacityAnim = useRef(new Animated.Value(0)).current; // Start with transparent background
@@ -88,11 +90,15 @@ export const ChooseCourseModal: React.FC<ChooseCourseModalProps> = ({
                   {/* Render courses */}
                   {courses.map((course) => (
                     <View key={course.id} style={styles.courseItem}>
-                      <Image
-                        source={{ uri: course.imageUrl }}
-                        style={styles.courseImage}
-                      />
-                      <Text style={styles.courseName}>{course.name.en}</Text>
+                      <TouchableOpacity
+                        onPress={() => onCourseClick(course.id)}
+                      >
+                        <Image
+                          source={{ uri: course.imageUrl }}
+                          style={styles.courseImage}
+                        />
+                        <Text style={styles.courseName}>{course.name.en}</Text>
+                      </TouchableOpacity>
                     </View>
                   ))}
                   {/* Add Course button */}
