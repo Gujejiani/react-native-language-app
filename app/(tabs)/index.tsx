@@ -11,12 +11,11 @@ import { CourseModule } from "@/pages/home/course-module/Course-module";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/store/store";
 import { fetchCourses } from "@/store/courses.effects";
-import LoadingModal from "@/ui/modals/loading/Loading";
+import { router } from "expo-router";
 
 export default function HomeScreen() {
   const dispatch = useDispatch();
 
-  const [showLoading, setShowLoading] = useState(false);
 
   const courses = useSelector((state: RootState) => state.courses);
 
@@ -33,12 +32,16 @@ export default function HomeScreen() {
   >([]);
 
   const courseClickedHandler = (id: number) => {
-    setShowLoading(true);
-    // setTimeout(() => {
-    //   setShowLoading(false);
-    // }, 3000);
+   
 
-    console.log("course clicked index.tsx", id, showLoading);
+    router.navigate({
+      pathname: '/loading-screen',
+      params: {
+        redirectUrl: './index.tsx'
+      }
+    })
+
+    console.log("course clicked index.tsx", id);
   };
 
   const setVisibleModuleHandler = (moduleID: number) => {
@@ -86,10 +89,9 @@ export default function HomeScreen() {
     },
     [],
   );
-  console.log("state upd", showLoading);
+
   return (
     <ThemedView>
-      <LoadingModal visible={showLoading} />
 
       <HomeScreenHeader
         courseClicked={courseClickedHandler}

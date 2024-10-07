@@ -58,7 +58,7 @@ const LessonScreen: React.FC<{}> = (props) => {
 
   return (
     <>
-      <Stack.Screen options={{ title: "Oops!", headerShown: false }} />
+      <Stack.Screen options={{ title: "lesson-screen!", headerShown: false }} />
       <ThemedView style={styles.container}>
         {currentChallenge ? (
           <Challenge

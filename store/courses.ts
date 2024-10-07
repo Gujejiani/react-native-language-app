@@ -1,6 +1,6 @@
 import { ICourse } from "@/models";
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchCourses } from "./courses.effects";
+import { fetchCourses, mockCourses } from "./courses.effects";
 
 interface InitialState {
   courses: ICourse[];
@@ -8,7 +8,7 @@ interface InitialState {
   error: null | string;
 }
 const initialState: InitialState = {
-  courses: [],
+  courses: mockCourses,
   loading: false,
   error: null,
 };
