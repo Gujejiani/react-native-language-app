@@ -54,6 +54,7 @@ export default function HomeScreen() {
     }
   };
   useEffect(() => {
+    
     console.log("fetching courses");
     dispatch(fetchCourses() as any);
   }, []);

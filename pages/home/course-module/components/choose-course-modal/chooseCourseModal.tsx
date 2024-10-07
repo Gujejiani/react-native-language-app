@@ -88,7 +88,7 @@ export const ChooseCourseModal: React.FC<ChooseCourseModalProps> = ({
                   showsHorizontalScrollIndicator={false}
                 >
                   {/* Render courses */}
-                  {courses.map((course) => (
+                   { courses?.map((course) => (
                     <View key={course.id} style={styles.courseItem}>
                       <TouchableOpacity
                         onPress={() => onCourseClick(course.id)}
