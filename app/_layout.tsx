@@ -42,7 +42,7 @@ export default function RootLayout() {
   return (
     <CustomThemeProvider onThemeChange={updateTheme}>
       <Provider store={store}>
-        <SafeAreaView style={{ flex: 1 }}>
+        <SafeAreaView style={{ flex: 1 }} edges={['top']} >
           <ThemeProvider
             value={
               theme === "dark"
