@@ -16,7 +16,6 @@ import { router } from "expo-router";
 export default function HomeScreen() {
   const dispatch = useDispatch();
 
-
   const courses = useSelector((state: RootState) => state.courses);
 
   const modules: IUnit[] = modulesMock;
@@ -32,14 +31,12 @@ export default function HomeScreen() {
   >([]);
 
   const courseClickedHandler = (id: number) => {
-   
-
     router.navigate({
-      pathname: '/loading-screen',
+      pathname: "/loading-screen",
       params: {
-        redirectUrl: './index.tsx'
-      }
-    })
+        redirectUrl: "./index.tsx",
+      },
+    });
 
     console.log("course clicked index.tsx", id);
   };
@@ -57,7 +54,6 @@ export default function HomeScreen() {
     }
   };
   useEffect(() => {
-    
     console.log("fetching courses");
     dispatch(fetchCourses() as any);
   }, []);
@@ -92,7 +88,6 @@ export default function HomeScreen() {
 
   return (
     <ThemedView>
-
       <HomeScreenHeader
         courseClicked={courseClickedHandler}
         courses={courses.courses}
