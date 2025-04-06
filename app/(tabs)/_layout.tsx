@@ -20,6 +20,9 @@ export default function TabLayout() {
       screenOptions={{
         tabBarActiveTintColor: Colors[colorScheme ?? "light"].tint,
         headerShown: false,
+        tabBarLabelStyle: {
+          fontSize: 12, // ✅ force a valid number
+        },
       }}
     >
       <Tabs.Screen
