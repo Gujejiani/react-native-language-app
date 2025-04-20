@@ -64,12 +64,8 @@ export const fetchCourses = createAsyncThunk<ICourse[]>(
   async () => {
     console.log("am called");
     try {
-      console.log("calling");
+      const response = await axios.get("http://172.20.10.2:3000/courses"); // Ensure the endpoint is correct
 
-      const response = await axios.get("http://192.168.0.119:3000/courses"); // Ensure the endpoint is correct
-
-      // Return the data directly
-      console.log("hahaha");
       return response.data;
     } catch (err: any) {
       // In case of an error, log it and return mock data

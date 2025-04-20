@@ -35,7 +35,11 @@ const coursesSlice = createSlice({
       .addCase(fetchCourses.rejected, (state, action) => {
         console.log(action);
         state.loading = false;
+        state.courses = [];
         state.error = action.error.message || "Failed to fetch courses";
+        if (mockCourses.length) {
+          state.courses = mockCourses;
+        }
         // state.courses = action.payload
       });
   },
