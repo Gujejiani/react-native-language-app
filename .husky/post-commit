@@ -1,11 +1,20 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
+# Get the list of staged files
+staged_files=$(git diff --name-only --cached)
+
+# If there are no staged files, exit early
+if [ -z "$staged_files" ]; then
+  echo "No staged files to format."
+  exit 0
+fi
+
 # Run Prettier to format the staged files
-npm run format
+npx prettier --write "$staged_files"
 
 # Check if there are any changes after running Prettier
-if [ -n "$(git status --porcelain)" ]; then
+if [ -n "$(git diff --name-only --cached)" ]; then
   # Stage the changes
   git add .
 
