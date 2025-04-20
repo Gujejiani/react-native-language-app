@@ -16,9 +16,9 @@ import { router } from "expo-router";
 export default function HomeScreen() {
   const dispatch = useDispatch();
 
-  const courses = useSelector((state: RootState) => state.courses);
-
+  const courses = useSelector((state: RootState) => state.courses.courses);
   const modules: IUnit[] = modulesMock;
+
   const scrollRef = useRef<Animated.ScrollView>(null);
 
   const [currentScrollY, setCurrentScrollY] = useState(0);
@@ -33,9 +33,6 @@ export default function HomeScreen() {
   const courseClickedHandler = (id: number) => {
     router.navigate({
       pathname: "/loading-screen",
-      params: {
-        redirectUrl: "./index.tsx",
-      },
     });
 
     console.log("course clicked index.tsx", id);
@@ -56,6 +53,7 @@ export default function HomeScreen() {
   useEffect(() => {
     console.log("fetching courses");
     dispatch(fetchCourses() as any);
+
   }, []);
   useEffect(() => {
     determineVisibleModule(currentScrollY);
@@ -90,7 +88,7 @@ export default function HomeScreen() {
     <ThemedView>
       <HomeScreenHeader
         courseClicked={courseClickedHandler}
-        courses={courses.courses}
+        courses={courses}
       ></HomeScreenHeader>
 
       <SectionHeader

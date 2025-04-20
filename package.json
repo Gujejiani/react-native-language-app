@@ -16,6 +16,7 @@
     "preset": "jest-expo"
   },
   "dependencies": {
+    "@apollo/client": "^3.13.8",
     "@expo/config-plugins": "~9.0.0",
     "@expo/prebuild-config": "~8.0.0",
     "@expo/vector-icons": "^14.0.3",
@@ -34,6 +35,7 @@
     "expo-status-bar": "~2.0.1",
     "expo-system-ui": "~4.0.9",
     "expo-web-browser": "~14.0.2",
+    "graphql": "^16.10.0",
     "jest-expo": "~52.0.6",
     "metro": "^0.81.4",
     "metro-config": "^0.81.4",

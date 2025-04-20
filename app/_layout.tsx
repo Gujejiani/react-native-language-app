@@ -8,7 +8,8 @@ import { Stack } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
 import { useEffect, useState } from "react";
 import "react-native-reanimated";
-
+import { ApolloProvider } from '@apollo/client';
+import { client } from '@/utils/graphql/client';
 import { useColorScheme } from "@/hooks/useColorScheme";
 import { CustomThemeProvider } from "@/context/theme/themeProvider";
 import { Provider } from "react-redux";
@@ -40,27 +41,29 @@ export default function RootLayout() {
   };
 
   return (
-    <CustomThemeProvider onThemeChange={updateTheme}>
-      <Provider store={store}>
-        <SafeAreaView style={{ flex: 1 }} edges={["top"]}>
-          <ThemeProvider
-            value={
-              theme === "dark"
-                ? DarkTheme
-                : theme === "light"
-                  ? DefaultTheme
-                  : colorScheme === "dark"
-                    ? DarkTheme
-                    : DefaultTheme
-            }
-          >
-            <Stack>
-              <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-              <Stack.Screen name="+not-found" />
-            </Stack>
-          </ThemeProvider>
-        </SafeAreaView>
-      </Provider>
-    </CustomThemeProvider>
+    <ApolloProvider client={client}>
+      <CustomThemeProvider onThemeChange={updateTheme}>
+        <Provider store={store}>
+          <SafeAreaView style={{ flex: 1 }} edges={["top"]}>
+            <ThemeProvider
+              value={
+                theme === "dark"
+                  ? DarkTheme
+                  : theme === "light"
+                    ? DefaultTheme
+                    : colorScheme === "dark"
+                      ? DarkTheme
+                      : DefaultTheme
+              }
+            >
+              <Stack>
+                <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+                <Stack.Screen name="+not-found" />
+              </Stack>
+            </ThemeProvider>
+          </SafeAreaView>
+        </Provider>
+      </CustomThemeProvider>
+    </ApolloProvider>
   );
 }

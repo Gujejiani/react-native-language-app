@@ -1,6 +1,8 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { CourseHeaderBackgroundEnum, ICourse } from "@/models";
 import axios from "axios";
+import { client } from "@/utils/graphql/client";
+import { GET_COURSE_BY_ID, GET_COURSES_WHOLE_INFO, GetCourseByIdResponse, GetCoursesWholeInfoResponse } from "@/utils/graphql/queries/course";
 
 // Define mock data
 export const mockCourses: ICourse[] = [
@@ -61,16 +63,116 @@ export const mockCourses: ICourse[] = [
 
 export const fetchCourses = createAsyncThunk<ICourse[]>(
   "courses/fetchCourses",
-  async () => {
-    console.log("am called");
+  async (_, { rejectWithValue }) => {
     try {
-      const response = await axios.get("http://172.20.10.2:3000/courses"); // Ensure the endpoint is correct
+      const response = await client.query<GetCoursesWholeInfoResponse>({
+        query: GET_COURSES_WHOLE_INFO
+      });
 
-      return response.data;
+      // Transform the GraphQL response to match your ICourse interface
+      const transformedCourses: ICourse[] = response.data.courses.map((course, index) => ({
+        id: index + 1, // Generate an ID if not provided by API
+        name: course.name,
+        description: { en: "", es: "" }, // Default description
+        sections: course.sections.map((section) => ({
+          id: section.id,
+          name: section.name,
+          units: section.units.map((unit) => ({
+            id: unit.id,
+            name: unit.name,
+            description: { en: "", es: "" },
+            lessons: unit.lessons.map((lesson) => ({
+              id: lesson.id,
+              name: lesson.name,
+              description: { en: "", es: "" },
+              content: "",
+              status: "unlocked",
+              challenges: lesson.challenges.map((challenge) => ({
+                id: challenge.id,
+                name: challenge.name.en, // Use English name as default
+                description: "Challenge from API",
+                type: "quiz", // Default type
+                content: "",
+                question: "",
+                status: "unlocked",
+                options: challenge.options.map(option => ({
+                  id: option.id,
+                  optionText: option.optionText,
+                  isCorrect: false // Default, to be updated with real data
+                }))
+              }))
+            })),
+            count: unit.lessons.length,
+            unitColor: CourseHeaderBackgroundEnum.Pink
+          }))
+        }))
+      }));
+
+    
+      return transformedCourses;
     } catch (err: any) {
-      // In case of an error, log it and return mock data
-      console.error("Error fetching courses, returning mock data:", err);
-      // return mockCourses; // Return mock data instead of throwing an error
+      console.error("Error fetching courses:", err);
+      return rejectWithValue(mockCourses);
     }
   },
+);
+
+export const fetchCourseById = createAsyncThunk<ICourse, number>(
+  "courses/fetchCourseById",
+  async (id, { rejectWithValue }) => {
+    try {
+      const response = await client.query<GetCourseByIdResponse>({
+        query: GET_COURSE_BY_ID,
+        variables: { id }
+      });
+
+      const course = response.data.course;
+      
+      // Transform GraphQL response to match ICourse interface
+      const transformedCourse: ICourse = {
+        id,
+        name: course.name,
+        description: { en: "", es: "" },
+        sections: course.sections.map((section) => ({
+          id: section.id,
+          name: section.name,
+          units: section.units.map((unit) => ({
+            id: unit.id,
+            name: unit.name,
+            description: { en: "", es: "" },
+            lessons: unit.lessons.map((lesson) => ({
+              id: lesson.id,
+              name: lesson.name,
+              description: { en: "", es: "" },
+              content: "",
+              status: "unlocked",
+              challenges: lesson.challenges.map((challenge) => ({
+                id: challenge.id,
+                name: challenge.name.en, // Use English name as the default name
+                description: "Challenge from API", // Default description
+                type: "quiz", // Default type
+                content: "",
+                question: "",
+                status: "unlocked",
+                options: challenge.options.map(option => ({
+                  id: option.id,
+                  optionText: option.optionText,
+                  isCorrect: false // Default, to be updated with real data
+                }))
+              }))
+            })),
+            count: unit.lessons.length,
+            unitColor: CourseHeaderBackgroundEnum.Pink
+          }))
+        }))
+      };
+
+      return transformedCourse;
+    } catch (error) {
+      console.error("Error fetching course by ID:", error);
+      // Instead of returning mock data, properly use rejectWithValue
+      const fallbackCourse = mockCourses.find(course => course.id === id) || mockCourses[0];
+      return rejectWithValue(fallbackCourse);
+    }
+  }
 );
