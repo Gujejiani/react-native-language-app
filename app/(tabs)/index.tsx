@@ -1,6 +1,6 @@
 import { StyleSheet } from "react-native";
 import { ThemedView } from "@/components/ThemedView";
-import { IUnit, CourseBackground, ICourse } from "@/models";
+import { ICourse, ISection } from "@/models";
 import Animated from "react-native-reanimated";
 import * as Haptics from "expo-haptics";
 import { act, useCallback, useEffect, useRef, useState } from "react";
@@ -15,7 +15,6 @@ import { setActiveCourseId } from "@/store/courses";
 import { Section } from "@/pages/home/course-module/Section";
 
 
-// TODO now header is looking for module name it must take a look for section data instead unit
 export default function HomeScreen() {
   const dispatch = useDispatch();
 
@@ -28,16 +27,16 @@ export default function HomeScreen() {
 
   const activeCourseData  = 4>3 ? activeMockCourse: activeCourse;
 
-  const units: IUnit[] = activeCourseData?.sections[0]?.units || [];
+  const sections: ISection[] = activeCourseData?.sections || [];
 
   const scrollRef = useRef<Animated.ScrollView>(null);
 
   const [currentScrollY, setCurrentScrollY] = useState(0);
 
-  const [visibleModule, setVisibleUnit] = useState<IUnit>(units[0]);
+  const [visibleModule, setVisibleUnit] = useState<ISection>(sections[0]);
 
   // module id => positionY
-  const [modulePositionsY, setModulePositionsY] = useState<
+  const [sectionPositionY, setSectionPositionsY] = useState<
     Record<number, number>
   >([]);
 
@@ -50,15 +49,15 @@ export default function HomeScreen() {
     console.log("course clicked index.tsx", id);
   };
 
-  const setVisibleUnitHandler = (moduleID: number) => {
+  const setVisibleSectionHandler = (moduleID: number) => {
     if (moduleID === visibleModule.id) {
       return;
     }
 
-    const unit = units.find((unit) => unit.id === moduleID);
+    const section = sections.find((unit) => unit.id === moduleID);
 
-    if (unit) {
-      setVisibleUnit(unit);
+    if (section) {
+      setVisibleUnit(section);
       Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
     }
   };
@@ -68,28 +67,28 @@ export default function HomeScreen() {
 
   }, []);
   useEffect(() => {
-    determineVisibleModule(currentScrollY);
+    determineVisibleSection(currentScrollY);
   }, [currentScrollY]);
 
-  const determineVisibleModule = (scrollY: number) => {
-    const moduleIDs = Object.keys(modulePositionsY).map((id) => parseInt(id));
+  const determineVisibleSection = (scrollY: number) => {
+    const sectionIds = Object.keys(sectionPositionY).map((id) => parseInt(id));
 
-    let closestModalId = moduleIDs[0];
-    moduleIDs.forEach((id) => {
-      if (modulePositionsY[id] < scrollY) {
+    let closestModalId = sectionIds[0];
+    sectionIds.forEach((id) => {
+      if (sectionPositionY[id] < scrollY) {
         closestModalId = id;
       }
     });
 
-    setVisibleUnitHandler(closestModalId);
+    setVisibleSectionHandler(closestModalId);
   };
 
-  const setUnitPositionsYHandler = useCallback(
-    (moduleID: number, positionY: number) => {
-      setModulePositionsY((prevState) => {
+  const setSectionPositionYHandler = useCallback(
+    (sectionID: number, positionY: number) => {
+      setSectionPositionsY((prevState) => {
         return {
           ...prevState,
-          [moduleID]: positionY,
+          [sectionID]: positionY,
         };
       });
     },
@@ -104,9 +103,10 @@ export default function HomeScreen() {
       ></HomeScreenHeader>
 
       <SectionHeader
-        sectionBackgroundColor={visibleModule.unitColor}
+        sectionBackgroundColor={visibleModule.sectionColor}
+        // TODO 
         title={visibleModule.name.en}
-        description={visibleModule.description.en}
+        description={visibleModule.name.en}
       ></SectionHeader>
       <Animated.ScrollView
         onScroll={(event) => {
@@ -120,7 +120,7 @@ export default function HomeScreen() {
             activeCourseData?.sections.map((section) => {
             return (
               <Section
-                updateModulePosition={setUnitPositionsYHandler}
+                updateModulePosition={setSectionPositionYHandler}
                 scrollY={currentScrollY}
                 scrollViewRef={scrollRef}
                 key={section.id}

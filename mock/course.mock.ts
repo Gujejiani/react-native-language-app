@@ -521,25 +521,25 @@ export const mockCourses: ICourse[] = [
       {
         id: 1,
         name: { en: "Getting Started with TypeScript", es: "Comenzando con TypeScript" },
-        units: [unitsMock[0], unitsMock[1]], // Basic Syntax and Data Types units
+        units: [unitsMock[0], unitsMock[1], unitsMock[2], {...unitsMock[2], id: 100}], // Basic Syntax and Data Types units
         sectionColor: CourseHeaderBackgroundEnum.Pink,
       },
       {
         id: 2,
         name: { en: "What is new", es: "Comenzando con Interfaces" },
-        units: [unitsMock[0], unitsMock[1]],  // Basic Syntax and Data Types units
+        units: [unitsMock[0], unitsMock[1], unitsMock[2], {...unitsMock[2], id: 100}], // Basic Syntax and Data Types units
         sectionColor: CourseHeaderBackgroundEnum.LightBlue,
       },
       {
         id: 3,
         name: { en: "Modern Web", es: "Comenzando con Interfaces" },
-        units: [unitsMock[0], unitsMock[1]],  // Basic Syntax and Data Types units
+        units: [unitsMock[0], unitsMock[1], unitsMock[2], {...unitsMock[2], id: 100}], // Basic Syntax and Data Types units
         sectionColor: CourseHeaderBackgroundEnum.LightGreen,
       },
       {
         id: 4,
         name: { en: "TypeScript essentials", es: "Comenzando con Interfaces" },
-        units: [unitsMock[0], unitsMock[1]],
+        units: [unitsMock[0], unitsMock[1], unitsMock[2], {...unitsMock[2], id: 100}], // Basic Syntax and Data Types units
         sectionColor: CourseHeaderBackgroundEnum.Purple, // Basic Syntax and Data Types units
       },
       
