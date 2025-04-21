@@ -4,7 +4,6 @@ import React from "react";
 import { StyleSheet, LayoutChangeEvent } from "react-native";
 import UnitTitle from "./components/module-title/UnitTitle";
 import Lesson from "./components/lesson/Lesson";
-import { ScrollView } from "react-native-gesture-handler";
 import Animated from "react-native-reanimated";
 import { router } from "expo-router";
 

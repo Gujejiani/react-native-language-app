@@ -12,11 +12,19 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/store/store";
 import { fetchCourses } from "@/store/courses.effects";
 import { router } from "expo-router";
+import { setActiveCourseId } from "@/store/courses";
 
+
+//  todo 
+//  update data in database to properly have everything 
+//  use real data to display 
+//  section needs to be determined and unlocked one must be rendered first 
 export default function HomeScreen() {
   const dispatch = useDispatch();
 
   const courses = useSelector((state: RootState) => state.courses.courses);
+
+  const activeCourse = useSelector((state: RootState) => state.courses.courses.find((course) => course.id === state.courses.activeCourseId));
   const modules: IUnit[] = modulesMock;
 
   const scrollRef = useRef<Animated.ScrollView>(null);
@@ -35,6 +43,7 @@ export default function HomeScreen() {
       pathname: "/loading-screen",
     });
 
+    dispatch(setActiveCourseId(id));
     console.log("course clicked index.tsx", id);
   };
 
@@ -103,7 +112,9 @@ export default function HomeScreen() {
         ref={scrollRef}
       >
         <ThemedView style={styles.container}>
-          {modules.map((module) => {
+          {
+          // activeCourse?.sections[0]?.units.map((module) => {
+          modules.map((module) => {
             return (
               <CourseModule
                 updateModulePosition={setModulePositionsYHandler}

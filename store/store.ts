@@ -12,6 +12,9 @@ export const store = configureStore({
 export interface RootState {
   courses: {
     courses: ICourse[];
+    activeCourse: ICourse | null;
+    activeCourseId: ICourse['id'] | null;
+    activeCourseLoading: boolean;
   };
   // Add other slices of state here if needed
 }
