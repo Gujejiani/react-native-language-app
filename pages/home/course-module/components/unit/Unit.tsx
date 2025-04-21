@@ -1,29 +1,31 @@
 import { ThemedView } from "@/components/ThemedView";
 import InfoModal from "@/components/ui-library/Info-modal/InfoModal";
 import LessonButton from "@/components/ui-library/Lesson-Button/LessonButton";
-import { ILesson, IUnit } from "@/models";
+import { CourseBackground, ILesson, IUnit } from "@/models";
 import { useRef, useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import Animated from "react-native-reanimated";
 
 interface LessonProps {
-  lesson: ILesson;
+
   startLesson: () => void;
   title: string;
   description: string;
   scrollViewRef: React.RefObject<Animated.ScrollView>;
   scrollY: number; // Receive shared scroll value
-  module: IUnit;
+  unit: IUnit;
+  sectionColor: CourseBackground;
 }
 
 const Lesson: React.FC<LessonProps> = ({
-  lesson,
+
   startLesson,
   title,
   description,
   scrollViewRef,
   scrollY,
-  module,
+  unit,
+  sectionColor
 }) => {
   const [buttonPosition, setButtonPosition] = useState({ x: 0, y: 0 });
   const [showModal, setShowModal] = useState(false);
@@ -52,9 +54,9 @@ const Lesson: React.FC<LessonProps> = ({
         <LessonButton
           iconName="star"
           progress={0.75}
-          label={lesson.status === "unlocked" ? "Start" : ""}
-          disabled={lesson.status === "locked"}
-          moduleBackground={module.unitColor}
+          label={unit.status === "unlocked" ? "Start" : ""}
+          disabled={unit.status === "locked"}
+          moduleBackground={sectionColor}
           onPress={buttonPressHandler}
         />
       </View>
@@ -69,8 +71,8 @@ const Lesson: React.FC<LessonProps> = ({
             action={startLessonHandler}
             buttonPosition={buttonPosition}
             onClose={closeModal}
-            locked={lesson.status === "locked"}
-            buttonText={lesson.status === "locked" ? "Locked" : "Start Lesson"}
+            locked={unit.status === "locked"}
+            buttonText={unit.status === "locked" ? "Locked" : "Start Lesson"}
           />
         ) : (
           ""

@@ -1,7 +1,7 @@
-import { IUnit, CourseHeaderBackgroundEnum } from "@/models";
+import { IUnit, CourseHeaderBackgroundEnum, ICourse } from "@/models";
 
 // Mock Data for ICourses
-const modulesMock: IUnit[] = [
+export const unitsMock: IUnit[] = [
   {
     id: 1,
     name: { en: "Basic Syntax", es: "Sintaxis Básica" },
@@ -13,6 +13,7 @@ const modulesMock: IUnit[] = [
     icon: "syntax-icon",
     count: 10,
     unitColor: CourseHeaderBackgroundEnum.Pink,
+    status: "unlocked",
     lessons: [
       {
         id: 1,
@@ -166,6 +167,7 @@ const modulesMock: IUnit[] = [
   },
   {
     id: 2,
+    status: "unlocked",
     name: { en: "Data Types", es: "Tipos de Datos" },
     description: {
       en: "Section 1, lesson 2",
@@ -288,6 +290,7 @@ const modulesMock: IUnit[] = [
   },
   {
     id: 3,
+    status: "unlocked",
     name: { en: "Functions and Interfaces", es: "Funciones e Interfaces" },
     description: {
       en: "Section 1, lesson 3",
@@ -502,4 +505,61 @@ const modulesMock: IUnit[] = [
   },
 ];
 
-export default modulesMock;
+
+
+
+export const mockCourses: ICourse[] = [
+  {
+    id: 1,
+    name: { en: "TypeScript Fundamentals", es: "Fundamentos de TypeScript" },
+    description: {
+      en: "Learn the basics of TypeScript programming",
+      es: "Aprende los fundamentos de la programación con TypeScript",
+    },
+    imageUrl: "https://static.vecteezy.com/system/resources/previews/027/127/463/original/javascript-logo-javascript-icon-transparent-free-png.png",
+    sections: [
+      {
+        id: 1,
+        name: { en: "Getting Started with TypeScript", es: "Comenzando con TypeScript" },
+        units: [unitsMock[0], unitsMock[1]], // Basic Syntax and Data Types units
+        sectionColor: CourseHeaderBackgroundEnum.Pink,
+      },
+      {
+        id: 2,
+        name: { en: "What is new", es: "Comenzando con Interfaces" },
+        units: [unitsMock[0], unitsMock[1]],  // Basic Syntax and Data Types units
+        sectionColor: CourseHeaderBackgroundEnum.LightBlue,
+      },
+      {
+        id: 3,
+        name: { en: "Modern Web", es: "Comenzando con Interfaces" },
+        units: [unitsMock[0], unitsMock[1]],  // Basic Syntax and Data Types units
+        sectionColor: CourseHeaderBackgroundEnum.LightGreen,
+      },
+      {
+        id: 4,
+        name: { en: "TypeScript essentials", es: "Comenzando con Interfaces" },
+        units: [unitsMock[0], unitsMock[1]],
+        sectionColor: CourseHeaderBackgroundEnum.Purple, // Basic Syntax and Data Types units
+      },
+      
+    ]
+  },
+  {
+    id: 2,
+    name: { en: "Advanced TypeScript", es: "TypeScript Avanzado" },
+    description: {
+      en: "Master advanced TypeScript concepts",
+      es: "Domina conceptos avanzados de TypeScript",
+    },
+    imageUrl: "https://download.logo.wine/logo/PostgreSQL/PostgreSQL-Logo.wine.png",
+    sections: [
+      {
+        id: 2,
+        name: { en: "Advanced TypeScript Features", es: "Características Avanzadas de TypeScript" },
+        units: [unitsMock[1]], // Can add more ad
+       sectionColor: CourseHeaderBackgroundEnum.Orange
+      }
+    ]
+  }
+];

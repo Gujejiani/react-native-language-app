@@ -17,6 +17,8 @@ export interface ISection {
   id: number;
   name: LocalizedString;
   units: IUnit[];
+  sectionColor: CourseBackground;
+
 }
 
 export interface IUnit {
@@ -28,6 +30,7 @@ export interface IUnit {
   lessons: ILesson[];
   count: number;
   unitColor: CourseBackground;
+  status: IStatus;
 }
 
 export interface ILesson {
@@ -39,10 +42,10 @@ export interface ILesson {
   content: string | MultimediaContent;
   challenges: IChallenge[]; // Unified concept for tasks and exams
 
-  status: LessonStatus;
+  status: IStatus;
 }
 
-export type LessonStatus = "locked" | "unlocked" | "completed";
+export type IStatus = "locked" | "unlocked" | "completed";
 
 export interface IChallenge {
   id: number;

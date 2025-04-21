@@ -1,21 +1,21 @@
 import { ThemedView } from "@/components/ThemedView";
-import { IUnit } from "@/models/";
+import { ISection, IUnit } from "@/models/";
 import React from "react";
 import { StyleSheet, LayoutChangeEvent } from "react-native";
 import UnitTitle from "./components/module-title/UnitTitle";
-import Lesson from "./components/lesson/Lesson";
+import Unit from "./components/unit/Unit";
 import Animated from "react-native-reanimated";
 import { router } from "expo-router";
 
 interface CourseModuleProps {
-  module: IUnit;
+  section: ISection;
   scrollViewRef: React.RefObject<Animated.ScrollView>;
   scrollY: number; // Receive shared scroll value
   updateModulePosition: (id: number, positionY: number) => void;
 }
 
-export const CourseModule: React.FC<CourseModuleProps> = ({
-  module,
+export const Section: React.FC<CourseModuleProps> = ({
+  section,
   scrollViewRef,
   scrollY,
   updateModulePosition,
@@ -32,10 +32,10 @@ export const CourseModule: React.FC<CourseModuleProps> = ({
     const { y } = event.nativeEvent.layout;
 
     console.log("module id", module.id, "positionY", y);
-    updateModulePosition(module.id, y);
+    updateModulePosition(section.id, y);
   };
 
-  const moduleLessons = module.lessons.map((lesson, index) => {
+  const moduleLessons = section?.units?.map((unit, index) => {
     const offset = index * 20; // Increase left or right offset progressively
     const isLeft = index % 2 !== 0;
 
@@ -48,16 +48,17 @@ export const CourseModule: React.FC<CourseModuleProps> = ({
             marginRight: !isLeft ? offset : 0,
           },
         ]}
-        key={lesson.id}
+        key={unit.id}
       >
-        <Lesson
+        <Unit
           scrollViewRef={scrollViewRef}
           scrollY={scrollY}
-          lesson={lesson}
-          module={module}
-          title={lesson.name.en}
-          description={lesson.description.en}
-          startLesson={() => startLessonHandler(lesson.id)}
+          sectionColor={section.sectionColor}
+          // lesson={lesson}
+          unit={unit}
+          title={unit.name.en}
+          description={unit.description.en}
+          startLesson={() => startLessonHandler(unit.id)}
         />
       </ThemedView>
     );
@@ -65,7 +66,7 @@ export const CourseModule: React.FC<CourseModuleProps> = ({
 
   return (
     <ThemedView style={styles.moduleContainer} onLayout={handleLayout}>
-      <UnitTitle title={module.name.en} />
+      <UnitTitle title={section.name.en} />
       {moduleLessons}
     </ThemedView>
   );

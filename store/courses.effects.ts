@@ -18,9 +18,11 @@ export const mockCourses: ICourse[] = [
     sections: [
       {
         id: 1,
+        sectionColor: CourseHeaderBackgroundEnum.Pink,
         name: { en: "Mock Section 1" },
         units: [
           {
+            status: "unlocked",
             id: 1,
             name: { en: "Mock Unit 1" },
             description: { en: "Description for Mock Unit 1" },
@@ -46,8 +48,10 @@ export const mockCourses: ICourse[] = [
       {
         id: 2,
         name: { en: "Mock Section 2" },
+        sectionColor: CourseHeaderBackgroundEnum.LightBlue,
         units: [
           {
+            status: "unlocked",
             id: 2,
             name: { en: "Mock Unit 2" },
             description: { en: "Description for Mock Unit 2" },
@@ -77,9 +81,11 @@ export const fetchCourses = createAsyncThunk<ICourse[]>(
         sections: course.sections.map((section) => ({
           id: section.id,
           name: section.name,
+          sectionColor: CourseHeaderBackgroundEnum.Pink,
           units: section.units.map((unit) => ({
             id: unit.id,
             name: unit.name,
+            status: "unlocked",
             description: { en: "", es: "" },
             lessons: unit.lessons.map((lesson) => ({
               id: lesson.id,
@@ -136,9 +142,11 @@ export const fetchCourseById = createAsyncThunk<ICourse, number>(
         sections: course.sections.map((section) => ({
           id: section.id,
           name: section.name,
+          sectionColor: CourseHeaderBackgroundEnum.Pink,
           units: section.units.map((unit) => ({
             id: unit.id,
             name: unit.name,
+            status: "unlocked",
             description: { en: "", es: "" },
             lessons: unit.lessons.map((lesson) => ({
               id: lesson.id,

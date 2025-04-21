@@ -4,10 +4,10 @@ import { ThemedView } from "@/components/ThemedView";
 import { router, Stack, useLocalSearchParams } from "expo-router";
 
 import { IChallenge, ILesson } from "@/models";
-import modulesMock from "@/mock/course.mock";
+import {unitsMock} from "@/mock/course.mock";
 import Challenge from "@/pages/lesson/Challenge";
 
-const modules = modulesMock;
+const modules = unitsMock;
 const LessonScreen: React.FC<{}> = (props) => {
   const progress = 0.5;
   const [lesson, setLesson] = useState<ILesson>();
